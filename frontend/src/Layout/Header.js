@@ -11,7 +11,7 @@ export default function Header() {
             <SearchBox />
             <a href="www.google.com" className="flex items-center">
               <img
-                src="message-regular.svg"
+                src="message-svgrepo-com.svg"
                 className="w-10"
                 alt="Message Icon"
               />
