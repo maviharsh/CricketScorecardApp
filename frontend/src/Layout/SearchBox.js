@@ -1,14 +1,26 @@
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
 
 export default function SearchBox() {
   const [dropdownOpen, setDropdownOpen] = useState(false);
+  const dropdownRef = useRef(null);
 
   const toggleDropdown = () => {
     setDropdownOpen(!dropdownOpen);
   };
 
+  const closeDropdown = (e) => {
+    if (dropdownRef.current && !dropdownRef.current.contains(e.target)) {
+      setDropdownOpen(false);
+    }
+  };
+
+  useEffect(() => {
+    document.addEventListener("mousedown", closeDropdown);
+    return () => document.removeEventListener("mousedown", closeDropdown);
+  }, []);
+
   return (
-    <form className="relative max-w-lg ">
+    <form className="relative max-w-lg">
       <div className="flex">
         <button
           id="dropdown-button"
@@ -34,11 +46,11 @@ export default function SearchBox() {
           </svg>
         </button>
 
-        {/* Dropdown */}
         {dropdownOpen && (
           <div
             id="dropdown"
-            className="absolute left-0 top-full z-30 w-44 bg-white divide-y divide-gray-100 rounded-lg shadow-lg dark:bg-gray-700"
+            ref={dropdownRef}
+            className="absolute left-0 top-full z-50 w-44 bg-white divide-y divide-gray-100 rounded-lg shadow-lg dark:bg-gray-700"
           >
             <ul className="py-2 text-sm text-gray-700 dark:text-gray-200">
               <li>
