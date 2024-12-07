@@ -1,6 +1,6 @@
 import Buttons from "./Buttons";
 
-export default function HomePage() {
+export default function PostPage() {
   return (
     <div className="mt-4 mx-4 px-5 pt-5 flex  flex-wrap justify-evenly gap-32">
         <Buttons source={"team-group-svgrepo-com.svg"} tex={"Teams For My Tournament"} />
