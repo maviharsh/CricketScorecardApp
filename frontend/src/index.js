@@ -9,6 +9,11 @@ import Form2 from './Community/CoachForm';
 import GroundForm from './Community/GroundForm';
 import HomePage from './LookingPage/HomePage';
 import { InputWithButton } from './Message';
+import BottomForm from './LookingPage/BottomForm';
+import PlayerTeam from './LookingPage/PlayerTeamForm';
+import TournamentForm from './LookingPage/TournamentForm';
+import TournamentParticipateForm from './LookingPage/TournamentParticipate';
+import OpponentForm from './LookingPage/OpponentForm';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
@@ -18,7 +23,14 @@ root.render(
     {/* <Form /> */}
     {/* <HomePage /> */}
     {/* <HomePage /> */}
-    <InputWithButton />
+    {/* <InputWithButton /> */}
+    {/* <HomePage /> */}
+    {/* <GroundForm /> */}
+    {/* <BottomForm /> */}
+    <PlayerTeam />
+    {/* <TournamentForm head={"Teams For My Tournament"} photo={"../public/team-group-svgrepo-com.svg"} /> */}
+    {/* <TournamentParticipateForm /> */}
+    {/* <OpponentForm /> */}
     <Footer />
   </React.StrictMode>
 );
