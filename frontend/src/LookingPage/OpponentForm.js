@@ -22,7 +22,7 @@ export default function OpponentForm({head,photo}) {
         className="m-0 grid place-items-center px-4 py-8 text-center"
       >
         <div className="mb-4 h-20 p-6 text-white">
-          <img src="{photo}" alt="imagica" className="h-16"></img>
+          <img src={photo} alt="imagica" className="h-16"></img>
         </div>
         <Typography variant="h5" color="white">
           {head}

@@ -1,19 +1,8 @@
-import { Link } from "react-router-dom";
-import LookingCard from "./LookingCard";
-import{
-   Button
-}
-from "@material-tailwind/react"
-export default function LookingHomePage()
+import LookingCard from "../LookingPage/LookingCard"
+export default function CardPage()
 {
    return(
-      <>
-          <div className="flex justify-end">
-            <Link to="/postpage">
-            <Button variant="gradient" className="m-5">POST</Button>
-            </Link>
-          </div>
-    <div className="mt-4 mx-4 px-5 pt-5 flex flex-wrap justify-evenly gap-20">
+    <div className="mt-4 mx-4 px-5 pt-5 flex  flex-wrap justify-evenly gap-32">
          <LookingCard />
          <LookingCard />
          <LookingCard />
@@ -45,7 +34,6 @@ export default function LookingHomePage()
          <LookingCard />
 
     </div>
-    </>
    )
 
 }

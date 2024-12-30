@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import {
   IconButton,
   Typography,
@@ -10,27 +11,22 @@ import {
   Accordion,
   AccordionHeader,
   AccordionBody,
-  Input,
   Drawer,
-  Card,
+  Card
 } from "@material-tailwind/react";
 import {
-  PresentationChartBarIcon,
-  ShoppingBagIcon,
   UserCircleIcon,
-  Cog6ToothIcon,
   InboxIcon,
   PowerIcon,
 } from "@heroicons/react/24/solid";
 import {
   ChevronRightIcon,
   ChevronDownIcon,
-  MagnifyingGlassIcon,
   Bars3Icon,
   XMarkIcon,
 } from "@heroicons/react/24/outline";
  
-export default function SidebarWithBurgerMenu() {
+export default function SidebarWithBurgerMenu({imag,name}) {
   const [open, setOpen] = React.useState(0);
   const [isDrawerOpen, setIsDrawerOpen] = React.useState(false);
  
@@ -58,20 +54,15 @@ export default function SidebarWithBurgerMenu() {
         >
           <div className="mb-2 flex items-center gap-4 p-4">
             <img
-              src="https://docs.material-tailwind.com/img/logo-ct-dark.png"
+              src={imag}
               alt="brand"
-              className="h-8 w-8"
+              className="h-6 w-6"
             />
             <Typography variant="h5" color="blue-gray">
-              Sidebar
+              {name}
             </Typography>
           </div>
-          <div className="p-2">
-            <Input
-              icon={<MagnifyingGlassIcon className="h-5 w-5" />}
-              label="Search"
-            />
-          </div>
+          
           <List>
             <Accordion
               open={open === 1}
@@ -90,77 +81,43 @@ export default function SidebarWithBurgerMenu() {
                   className="border-b-0 p-3"
                 >
                   <ListItemPrefix>
-                    <PresentationChartBarIcon className="h-5 w-5" />
+                    <img src="cricket-game-svgrepo-com.svg" alt="" className="h-5"></img>
                   </ListItemPrefix>
                   <Typography color="blue-gray" className="mr-auto font-normal">
-                    Dashboard
+                    My Cricket
                   </Typography>
                 </AccordionHeader>
               </ListItem>
               <AccordionBody className="py-1">
                 <List className="p-0">
+                <Link to="/mycricket">
                   <ListItem>
                     <ListItemPrefix>
                       <ChevronRightIcon strokeWidth={3} className="h-3 w-5" />
                     </ListItemPrefix>
-                    Analytics
+                    My Matches
                   </ListItem>
+                  </Link>
+                  <Link to="/mystats">
                   <ListItem>
                     <ListItemPrefix>
                       <ChevronRightIcon strokeWidth={3} className="h-3 w-5" />
                     </ListItemPrefix>
-                    Reporting
+                    My Stats
                   </ListItem>
+                  </Link>
+                  <Link to="/myteams">
                   <ListItem>
                     <ListItemPrefix>
                       <ChevronRightIcon strokeWidth={3} className="h-3 w-5" />
                     </ListItemPrefix>
-                    Projects
+                    My Teams
                   </ListItem>
+                  </Link>
                 </List>
               </AccordionBody>
             </Accordion>
-            <Accordion
-              open={open === 2}
-              icon={
-                <ChevronDownIcon
-                  strokeWidth={2.5}
-                  className={`mx-auto h-4 w-4 transition-transform ${
-                    open === 2 ? "rotate-180" : ""
-                  }`}
-                />
-              }
-            >
-              <ListItem className="p-0" selected={open === 2}>
-                <AccordionHeader
-                  onClick={() => handleOpen(2)}
-                  className="border-b-0 p-3"
-                >
-                  <ListItemPrefix>
-                    <ShoppingBagIcon className="h-5 w-5" />
-                  </ListItemPrefix>
-                  <Typography color="blue-gray" className="mr-auto font-normal">
-                    E-Commerce
-                  </Typography>
-                </AccordionHeader>
-              </ListItem>
-              <AccordionBody className="py-1">
-                <List className="p-0">
-                  <ListItem>
-                    <ListItemPrefix>
-                      <ChevronRightIcon strokeWidth={3} className="h-3 w-5" />
-                    </ListItemPrefix>
-                    Orders
-                  </ListItem>
-                  <ListItem>
-                    <ListItemPrefix>
-                      <ChevronRightIcon strokeWidth={3} className="h-3 w-5" />
-                    </ListItemPrefix>
-                    Products
-                  </ListItem>
-                </List>
-              </AccordionBody>
-            </Accordion>
+            
             <hr className="my-2 border-blue-gray-50" />
             <ListItem>
               <ListItemPrefix>
@@ -177,17 +134,19 @@ export default function SidebarWithBurgerMenu() {
                 />
               </ListItemSuffix>
             </ListItem>
+            <Link to="/profilepage">
             <ListItem>
               <ListItemPrefix>
                 <UserCircleIcon className="h-5 w-5" />
               </ListItemPrefix>
               Profile
             </ListItem>
+            </Link>
             <ListItem>
               <ListItemPrefix>
-                <Cog6ToothIcon className="h-5 w-5" />
+                <img src="cricket-svgrepo-com.svg" className="h-4" alt="imagica"></img>
               </ListItemPrefix>
-              Settings
+              Start A Match
             </ListItem>
             <ListItem>
               <ListItemPrefix>

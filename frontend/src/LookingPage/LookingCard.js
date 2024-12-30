@@ -31,11 +31,20 @@ import {
           </svg>
           </button>
           <Typography variant="h5" color="blue-gray" className="mb-2">
-            UI/UX Review Check
+            Opponent
           </Typography>
           <Typography>
-            Because it&apos;s about motivating the doers. Because I&apos;m here to
-            follow my dreams and inspire others.
+            <ul className="p-2 list-disc">
+              <li>
+                Israel's Team is looking for an opponent to play a match
+              </li>
+              <li>
+                Sat,Dec 21 2024|5:34 PM
+              </li>
+              <li>
+                Open Ground
+              </li>
+            </ul>
           </Typography>
         </CardBody>
         <CardFooter className="pt-0">
