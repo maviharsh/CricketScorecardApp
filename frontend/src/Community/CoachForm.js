@@ -10,7 +10,7 @@ import {
 
  
 export default function Form({photo,secondlast,last}) {
- 
+
   return (
     <div className="p-5 flex justify-center">
     <Card className="w-full max-w-[24rem]">

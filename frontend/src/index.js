@@ -5,7 +5,7 @@ import ReactDOM from 'react-dom/client';
 import './index.css';
 import "@material-tailwind/react";
 import Header from './Layout/Header';
-import {createBrowserRouter,RouterProvider} from "react-router-dom";
+import {createBrowserRouter,Link,RouterProvider} from "react-router-dom";
 import Footer from './Layout/Footer';
 import Form from './Community/Form';
 import Form2 from './Community/CoachForm';
@@ -28,6 +28,15 @@ import Message from './Message';
 import FrontHomePage from './HomePage/FrontHomePage';
 import MyTeams from './MyCricket/MyTeams';
 import ProfilePage from './MyCricket/ProfilePage';
+import StartMatch from './MyCricket/StartMatch';
+import AddNewTeam from './MyCricket/AddNewTeam';
+import { Button } from '@material-tailwind/react';
+import MatchDetails from './MyCricket/MatchDetails';
+import Toss from './MyCricket/Toss';
+import StartInnings from './MyCricket/StartInnings';
+import ScoringPage from './Scoring/ScoringPage';
+import ScoreBoard from './Scoring/ScoreBoard';
+import NotFound from './Scoring/NotFound';
 
 
 const router=createBrowserRouter(
@@ -175,6 +184,92 @@ const router=createBrowserRouter(
          <PlayerTeam/>      
         <Footer />
       </div>
+    },
+    {
+      path:"/startmatch",
+      element:
+      <div>
+        <Header />
+         <StartMatch />      
+        <Footer />
+      </div>
+    },
+    {
+      path:"/addnewteam",
+      element:
+      <div>
+        <Header />
+         <AddNewTeam />      
+        <Footer />
+      </div>
+    },
+    {
+      path:"/selectteam",
+      element:
+      <div>
+        <Header />
+         <MyTeams />   
+         <Link to="/addnewteam"> 
+         <div className='flex justify-center'>
+         <Button >Add New Team</Button>  
+         </div>
+         </Link>
+        <Footer />
+      </div>
+    },
+    {
+      path:"/matchdetails",
+      element:
+      <div>
+        <Header />
+        <MatchDetails />
+        <Footer />
+      </div>
+    },
+    {
+      path:"/tosspage",
+      element:
+      <div>
+        <Header />
+        <Toss />
+        <Footer />
+      </div>
+    },
+    {
+      path:"/startinnings",
+      element:
+      <div>
+        <Header />
+        <StartInnings team1={"11 Kings"} team2={"ABES Kings"}/>
+        <Footer />
+      </div>
+    },
+    {
+      path:"/scoringpage",
+      element:
+      <div>
+        <Header />
+        <ScoringPage />
+        <Footer />
+      </div>
+    },
+    {
+      path:"/score",
+      element:
+      <div>
+        <Header />
+        <ScoreBoard />
+        <Footer />
+      </div>
+    },
+    {
+          path:"*",
+          element:
+          <div>
+            <Header />
+            <NotFound />
+            <Footer />
+          </div>
     }
   ]
 );

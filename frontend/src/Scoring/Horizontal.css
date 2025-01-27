@@ -1,0 +1,48 @@
+
+.mainContainer{
+      margin: auto;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      padding: 10px;
+      height: 300px;
+    };
+    .formContainer {
+      margin: 2rem 0 2rem;
+      display: flex;
+      flex-direction: column;
+      align-items:center;
+      padding:10px;
+    };
+    .formGroup{
+      margin: 10px;
+    };
+    .resetContainer{
+      display: flex;
+      flex-direction :column;
+      justify-content: center;
+    };
+    .backButton {
+        margin-right: 8px; 
+      }
+      
+      .instructions {
+        margin-top: 8px; 
+        margin-bottom: 8px;
+      }
+      
+      .textField > * {
+        margin: 8px; 
+         width: 25ch;
+      }
+      
+    .textfieldWidth{
+      width: 200;
+    };
+    .teamNameHeading{
+      font-weight: bold,
+      };
+
+    .center{
+      text-align: center;
+    };
+  

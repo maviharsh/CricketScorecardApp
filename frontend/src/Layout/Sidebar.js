@@ -142,12 +142,14 @@ export default function SidebarWithBurgerMenu({imag,name}) {
               Profile
             </ListItem>
             </Link>
+            <Link to="/startmatch">
             <ListItem>
               <ListItemPrefix>
                 <img src="cricket-svgrepo-com.svg" className="h-4" alt="imagica"></img>
               </ListItemPrefix>
               Start A Match
             </ListItem>
+            </Link>
             <ListItem>
               <ListItemPrefix>
                 <PowerIcon className="h-5 w-5" />

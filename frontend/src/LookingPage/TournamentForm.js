@@ -30,7 +30,7 @@ export default function TournamentForm({head,photo}) {
       </CardHeader>
       <CardBody>
                 <form className="mt-4 flex flex-col gap-4">
-                    <div className="mb-5">
+                    <div>
                 <Typography
                     variant="small"
                     color="blue-gray"
@@ -48,7 +48,7 @@ export default function TournamentForm({head,photo}) {
                   <Typography
                     variant="small"
                     color="blue-gray"
-                    className="mt-5 font-medium"
+                    className="mt-4 font-medium"
                   >
                     MATCHES ON
                   </Typography>
@@ -57,11 +57,11 @@ export default function TournamentForm({head,photo}) {
                   </div>
                   
 
-                  <div className="mb-5">
+                  <div>
                   <Typography
                     variant="small"
                     color="blue-gray"
-                    className="mb-2 font-medium"
+                    className="font-medium"
                   >
                     START DATE
                   </Typography>
