@@ -2,25 +2,39 @@ import { Schema } from "mongoose";
 
 export const CoachSchema=new Schema({
     name:{
-        type:String
+        type:String,
+        required: true,
     },
     city:{
-        type:String
+        type:String,
+        required: true,
     },
     feesPM:{
-        type:Number
+        type:Number,
+        required: true,
     },
     feesPD:{
-        type:Number
+        type:Number,
+        required: true,
     },
     contact:
     {
-        type:Number
+        type:Number,
+        required: true,
     },
-    photo:
+    image:
     {
-        type:String
+            publicId:{
+                type: String,
+                required: true,
+            },
+            url: {
+                type: String,
+                required: true,
+            }
     }
-});
+},
+    {timestamps: true}
+);
 
 

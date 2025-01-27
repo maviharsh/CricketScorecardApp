@@ -1,6 +1,6 @@
 import React from "react";
-import { useState,useEffect } from "react";
-import axios from "axios";
+import { useState,useRef } from "react";
+
 
 import {
   Card,
@@ -11,65 +11,73 @@ import {
   Typography,
 } from "@material-tailwind/react";
 
-import {useFormik} from 'formik';
  
 export default function Form() {
 
-  const [coaches,setCoaches]=useState([]);
-  const url="http://localhost:4000/api/coachform";
-  useEffect(()=>{
-    axios.get(url)
-    .then((res)=>{
-          setCoaches(res.data);
-    })
-    .catch((err)=>{
-         console.log(err);
-    })
-  },[]);
- 
-   const formik=useFormik({
-    initialValues:{
-      name:'',
-      contact:'',
-      feesPM:'',
-      feesPD:'',
-      city:'',
-      imagica:''
-    },
-    onSubmit:(values)=>{
-      console.log(values);
-      
-      const formData=new FormData();
-      for(let value in values)
-      {
-        formData.append(value,values[value]);
-      }
+   let [name,setName]=useState("");
+   let [city,setCity]=useState("");
+   let [feesPD,setFeesPD]=useState("");
+   let [feesPM,setFeesPM]=useState("");
+   let [contact,setContact]=useState("");
+   let [image, setImage] = useState(null);
+   let [imageBase64, setImageBase64] = useState("");
+   let [loading, setLoading] = useState(false);
+   let [data, setData] = useState(null);
 
-      axios.post(url,formData)
-      .then((res)=>{
-             setCoaches(coaches.concat(res.data));
-      })
+   const fileInputRef = useRef();
 
-     }  
-   })
 
-  
+
+   // convert image file to base64
+   const setFileToBase64 = (file) => {
+   const reader = new FileReader();
+   reader.readAsDataURL(file);
+   reader.onloadend = () => {
+     setImageBase64(reader.result);
+   };
+ };
+
+ // receive file from form
+   const handleImage = (e) => {
+   const file = e.target.files[0];
+   setImage(file);
+   setFileToBase64(file);
+ };
+
+ const handleSubmit = async (e) => {
+  e.preventDefault()
+  setLoading(true)
+  const response = await fetch(`${process.env.REACT_APP_API_URL}/api/coachform`, {
+      method: "POST",
+      headers: {
+          "Content-Type": "application/json"
+      },
+      body: JSON.stringify({name, city,feesPD,feesPM,contact, image: imageBase64})
+  })
+
+  const json = await response.json()
+
+  if(response.ok){
+      setLoading(false)
+      setData(json)
+      console.log(json)
+  }
+  setName("");
+  setCity("");
+  setFeesPD("");
+  setFeesPM("");
+  setContact("");
+  setImage(null);
+   setImageBase64("");
+   fileInputRef.current.value = '';
+}
+
+ const isValid=name&&contact&&city&&feesPD&&feesPM&&image;
+
   return (
 
-     <>
-      <div>
-        {coaches.map((coach) => (
-          <div key={coach.id}>
-            <img src={coach.photo} alt='profile-pic' />
-            <h4>Name:{coach.name}</h4>
-            <h4>City:{coach.city}</h4>
-            <h4>Fees Per Match:{coach.feesPM}</h4>
-            <h4>Fees Per Day:{coach.feesPD}</h4>
-            <h4>Contact:{coach.contact}</h4>
-          </div>
-        ))}
-      </div>
-
+     
+      
     <div className="p-5 flex justify-center">
     <Card className="w-full max-w-[24rem]">
       <CardHeader
@@ -82,18 +90,17 @@ export default function Form() {
           <img src="referee-svgrepo-com.svg" alt="imagica" className="h-16"></img>
         </div>
         <input 
+        ref={fileInputRef}
         className="w-64" 
         type="file" 
         name='photo' 
         accept='image/*' 
-        onChange={(e)=>
-          formik.setFieldValue('photo',e.currentTarget.files[0])
-        } 
+        onChange={handleImage} 
         />
         
       </CardHeader>
       <CardBody>
-                <form onSubmit={formik.handleSubmit} encType="multipart/form-data" className="mt-4 flex flex-col gap-4">
+                <form onSubmit={handleSubmit} encType="multipart/form-data" className="mt-4 flex flex-col gap-4">
                 <div>
                   <Typography
                     variant="small"
@@ -109,8 +116,8 @@ export default function Form() {
                     }}
                     name="name"
                     type="text"
-                    onChange={formik.handleChange}
-                    value={formik.values.name}
+                    onChange={(e)=>setName(e.target.value)}
+                    value={name}
                   />
                 </div>
  
@@ -131,8 +138,8 @@ export default function Form() {
                         }}
                         name="city"
                         type="text"
-                        onChange={formik.handleChange}
-                        value={formik.values.city}
+                        onChange={(e)=>setCity(e.target.value)}
+                        value={city}
                       />
                   <div className="my-4 flex items-center gap-4">
                     <div>
@@ -151,8 +158,8 @@ export default function Form() {
                         }}
                         name="feesPM"
                         type="number"
-                        onChange={formik.handleChange}
-                        value={formik.values.feesPM}
+                        onChange={(e)=>setFeesPM(e.target.value)}
+                        value={feesPM}
                       />
                     </div>
                     <div>
@@ -171,8 +178,8 @@ export default function Form() {
                         }}
                         name="feesPD"
                         type="number"
-                        onChange={formik.handleChange}
-                        value={formik.values.feesPD}
+                        onChange={(e)=>setFeesPD(e.target.value)}
+                        value={feesPD}
                       />
                     </div>
                   </div>
@@ -190,15 +197,15 @@ export default function Form() {
                     }}
                     name="contact"
                     type="tel"
-                    onChange={formik.handleChange}
-                    value={formik.values.contact}
+                    onChange={(e)=>setContact(e.target.value)}
+                    value={contact}
                   />
                 </div>
-                <Button type="submit" size="lg">REGISTER</Button>
+                <Button type="submit" size="lg" disabled={!isValid}>{loading ? "Submitting..." : "REGISTER"}</Button>
               </form>
       </CardBody>
     </Card>
     </div>
-    </>
+  
     
   )};
