@@ -12,15 +12,28 @@ export const CoachSchema=new Schema({
     feesPM:{
         type:Number,
         required: true,
+        validate: {
+            validator: function (v) {
+              return v >= 0;
+            },
+            message: props => `${props.value} is not a valid number! It must be >= 0.` 
+        }
     },
     feesPD:{
         type:Number,
         required: true,
+        validate: {
+            validator: function (v) {
+              return v >= 0;
+            },
+            message: props => `${props.value} is not a valid number! It must be >= 0.` 
+        }
     },
     contact:
     {
         type:Number,
         required: true,
+    
     },
     image:
     {

@@ -57,7 +57,7 @@
   "react-dom": "^18.2.0",
   
     
-  "react-router-dom": "^7.0.2",
+  "react-router-dom": "^7.1.3",
   
     
   "react-scripts": "5.0.1",
@@ -69,7 +69,10 @@
   "web-vitals": "^2.1.4",
   
     
-  "yup": "^1.6.1"
+  "yup": "^1.6.1",
+  
+    
+  "yup-phone": "^1.3.2"
   
   },
   

@@ -1,6 +1,8 @@
 import React from "react";
 import { useState,useRef } from "react";
-
+import {useFormik} from "formik";
+import * as Yup from "yup";
+import {useNavigate} from "react-router-dom";
 
 import {
   Card,
@@ -14,11 +16,7 @@ import {
  
 export default function Form() {
 
-   let [name,setName]=useState("");
-   let [city,setCity]=useState("");
-   let [feesPD,setFeesPD]=useState("");
-   let [feesPM,setFeesPM]=useState("");
-   let [contact,setContact]=useState("");
+  
    let [image, setImage] = useState(null);
    let [imageBase64, setImageBase64] = useState("");
    let [loading, setLoading] = useState(false);
@@ -35,7 +33,7 @@ export default function Form() {
    reader.onloadend = () => {
      setImageBase64(reader.result);
    };
- };
+ }; 
 
  // receive file from form
    const handleImage = (e) => {
@@ -44,35 +42,63 @@ export default function Form() {
    setFileToBase64(file);
  };
 
- const handleSubmit = async (e) => {
-  e.preventDefault()
-  setLoading(true)
-  const response = await fetch(`${process.env.REACT_APP_API_URL}/api/coachform`, {
-      method: "POST",
-      headers: {
-          "Content-Type": "application/json"
-      },
-      body: JSON.stringify({name, city,feesPD,feesPM,contact, image: imageBase64})
-  })
-
-  const json = await response.json()
-
-  if(response.ok){
-      setLoading(false)
-      setData(json)
-      console.log(json)
+ const navigate=useNavigate();
+ 
+  const initial={
+    name:"",
+    city:"",
+    feesPD:"",
+    feesPM:"",
+     image:"",
+     contact:""
   }
-  setName("");
-  setCity("");
-  setFeesPD("");
-  setFeesPM("");
-  setContact("");
-  setImage(null);
-   setImageBase64("");
-   fileInputRef.current.value = '';
-}
 
- const isValid=name&&contact&&city&&feesPD&&feesPM&&image;
+  const CoachValidationSchema = Yup.object({
+    name: Yup.string().required("Please enter your name"),
+    city: Yup.string().required("Please enter your city"),
+    feesPD: Yup.number().required("Please enter daily fees").min(0, "Fees must be at least 0"),
+    feesPM: Yup.number().required("Please enter monthly fees").min(0, "Fees must be at least 0"),
+    contact: Yup.string().matches(/^[0-9]{10}$/, "Please enter a valid 10-digit contact number").required("Please enter your contact number"),
+   });
+
+  const {values,handleBlur,handleChange,handleSubmit,errors,resetForm}=useFormik({
+    initialValues:initial,
+    validationSchema:CoachValidationSchema,
+    onSubmit: async (e,{resetForm}) => {
+     setLoading(true)
+     const response = await fetch(`${process.env.REACT_APP_API_URL}/api/coachform`, {
+         method: "POST",
+         headers: {
+             "Content-Type": "application/json"
+         },
+         body: JSON.stringify(
+          {name:values.name, 
+            city:values.city,
+            feesPD:values.feesPD,
+            feesPM:values.feesPM,
+            contact:values.contact, 
+            image: imageBase64
+          })
+     })
+   
+     const json = await response.json()
+   
+     if(response.ok){
+         setData(json)
+         console.log(json)
+     }
+      
+     resetForm();
+     setImage(null);
+      setImageBase64("");
+      fileInputRef.current.value = '';
+      setLoading(false)
+      navigate("/individualpage");
+      
+   }
+  })
+  const isValid=values.name&&values.contact&&values.city&&values.feesPD&&values.feesPM&&image;
+
 
   return (
 
@@ -116,9 +142,13 @@ export default function Form() {
                     }}
                     name="name"
                     type="text"
-                    onChange={(e)=>setName(e.target.value)}
-                    value={name}
+                    onChange={handleChange}
+                    value={values.name}
+                    onBlur={handleBlur}
                   />
+                  {
+                    errors.name&&<small>{errors.name}</small>
+                  }
                 </div>
  
                 <div className="my-3">
@@ -138,9 +168,13 @@ export default function Form() {
                         }}
                         name="city"
                         type="text"
-                        onChange={(e)=>setCity(e.target.value)}
-                        value={city}
+                        onChange={handleChange}
+                    value={values.city}
+                    onBlur={handleBlur}
                       />
+                      {
+                    errors.city&&<small>{errors.city}</small>
+                  }
                   <div className="my-4 flex items-center gap-4">
                     <div>
                       <Typography
@@ -158,9 +192,13 @@ export default function Form() {
                         }}
                         name="feesPM"
                         type="number"
-                        onChange={(e)=>setFeesPM(e.target.value)}
-                        value={feesPM}
+                        onChange={handleChange}
+                        value={values.feesPM}
+                        onBlur={handleBlur}
                       />
+                      {
+                    errors.feesPM&&<small>{errors.feesPM}</small>
+                  }
                     </div>
                     <div>
                       <Typography
@@ -178,9 +216,13 @@ export default function Form() {
                         }}
                         name="feesPD"
                         type="number"
-                        onChange={(e)=>setFeesPD(e.target.value)}
-                        value={feesPD}
+                        onChange={handleChange}
+                        value={values.feesPD}
+                        onBlur={handleBlur}
                       />
+                      {
+                    errors.feesPD&&<small>{errors.feesPD}</small>
+                  }
                     </div>
                   </div>
                   <Typography
@@ -197,11 +239,15 @@ export default function Form() {
                     }}
                     name="contact"
                     type="tel"
-                    onChange={(e)=>setContact(e.target.value)}
-                    value={contact}
+                    onChange={handleChange}
+                    value={values.contact}
+                    onBlur={handleBlur}
                   />
+                  {
+                    errors.contact&&<small>{errors.contact}</small>
+                  }
                 </div>
-                <Button type="submit" size="lg" disabled={!isValid}>{loading ? "Submitting..." : "REGISTER"}</Button>
+                 <Button type="submit" size="lg" disabled={!isValid}>{loading ? "Submitting..." : "REGISTER"}</Button> 
               </form>
       </CardBody>
     </Card>
@@ -209,3 +255,5 @@ export default function Form() {
   
     
   )};
+
+  //NUMBER AND FEES VALIDATION

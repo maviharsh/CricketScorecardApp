@@ -3,7 +3,7 @@ import express from "express";
 import dotenv from "dotenv";
 import cors from "cors";
 
-import {router} from "./Routes/Coach.js"
+import {coachrouter} from "./Routes/index.js"
 
 const app = express();
 dotenv.config();
@@ -38,7 +38,8 @@ app.get("/hi", (req, res) => {
 });
 
 
-app.use('/api/coachform', router)
+app.use('/api/coachform', coachrouter)
+
 
 // Start server
 app.listen(port, () => {

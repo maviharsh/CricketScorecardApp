@@ -27,9 +27,21 @@ export const coach = async (req, res) => {
             image: imageData,
         });
 
-        res.status(200).json(user);
+        return res.status(200).json(user);
     } catch (e) {
         console.error("Error saving to MongoDB:", e);
         res.status(500).json({ error: e.message || "A server error occurred with this request" });
     }
 };
+
+
+export const getcoach=async(req,res)=>{
+         CoachModel.find()
+         .then((coaches)=>
+            {
+                // console.log(coaches.image.url);
+                res.json(coaches);
+            } )      
+         .catch((err)=>res.json(err))
+
+}

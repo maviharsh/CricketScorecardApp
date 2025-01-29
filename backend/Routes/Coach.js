@@ -1,11 +1,12 @@
 import express from "express";
 
 //controller functions
-import { coach } from "../Controllers/Coach.js";
+import { coach, getcoach } from "../Controllers/Coach.js";
 
-export const router = express.Router()
+export const coachrouter = express.Router()
 
-//create user route
-router.post('/', coach)
+coachrouter.post('/', coach)
+coachrouter.get('/',getcoach)
+
 
 
