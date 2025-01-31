@@ -14,7 +14,7 @@ import {
 } from "@material-tailwind/react";
 
  
-export default function Form() {
+export default function Form({photo}) {
 
   
    let [image, setImage] = useState(null);
@@ -113,7 +113,7 @@ export default function Form() {
         className="m-0 grid place-items-center px-4 py-8 text-center"
       >
         <div className="mb-4 h-20 p-6 text-white">
-          <img src="referee-svgrepo-com.svg" alt="imagica" className="h-16"></img>
+          <img src={photo} alt="imagica" className="h-16"></img>
         </div>
         <input 
         ref={fileInputRef}

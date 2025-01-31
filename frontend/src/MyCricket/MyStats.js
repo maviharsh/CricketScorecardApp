@@ -1,4 +1,4 @@
-import Carding from "../Community/Card";
+import Carding from "../Community/Elements/Card";
 import StatsCard from "./StatsCard";
 
 export default function MyStats()

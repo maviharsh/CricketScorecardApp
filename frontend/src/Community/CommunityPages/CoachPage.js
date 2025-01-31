@@ -1,4 +1,4 @@
-import Carding from "./Card";
+import Carding from "../Elements/Card";
 
 import { Link } from "react-router-dom";
 import{Button} from '@material-tailwind/react';
@@ -7,7 +7,7 @@ import { useState,useEffect } from "react";
 
 
 
-export default function IndividualPage()
+export default function CoachPage()
 {
 
   
@@ -29,7 +29,7 @@ export default function IndividualPage()
     return(
         <>
         <div className="flex justify-end">
-                        <Link to="/form">
+                        <Link to="/coachform">
                         <Button variant="gradient" className="m-5">REGISTER</Button>
                         </Link>
         </div>

@@ -1,5 +1,5 @@
 import React from "react";
-import CheckboxHorizontalListGroup from "./Checkbox";
+import CheckboxHorizontalListGroup from "../Elements/Checkbox";
 
 import {
   Card,
@@ -8,7 +8,6 @@ import {
   Input,
   Button,
   Typography,
-  Checkbox,
 } from "@material-tailwind/react";
 
 export default function GroundForm() {

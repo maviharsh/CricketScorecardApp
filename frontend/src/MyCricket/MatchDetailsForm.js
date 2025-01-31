@@ -1,5 +1,5 @@
 import React from "react";
-import CheckboxHorizontalListGroup from "../Community/Checkbox";
+import CheckboxHorizontalListGroup from "../Community/Elements/Checkbox";
 import {
   Card,
   CardHeader,

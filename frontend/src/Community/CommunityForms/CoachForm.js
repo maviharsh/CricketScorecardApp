@@ -9,7 +9,7 @@ import {
 } from "@material-tailwind/react";
 
  
-export default function Form({photo,secondlast,last}) {
+export default function Form({photo}) {
 
   return (
     <div className="p-5 flex justify-center">
@@ -123,7 +123,7 @@ export default function Form({photo,secondlast,last}) {
                         color="blue-gray"
                         className="mb-2 font-medium"
                       >
-                        {secondlast}
+                        YouTube Link
                       </Typography>
                       <Input
                         containerProps={{ className: "min-w-[72px]" }}
@@ -139,8 +139,8 @@ export default function Form({photo,secondlast,last}) {
                         color="blue-gray"
                         className="mb-2 font-medium"
                       >
-                        {last}
-                      </Typography>
+                        Facebook Link
+                        </Typography>
                       <Input
                         containerProps={{ className: "min-w-[72px]" }}
                         className=" !border-t-blue-gray-200 focus:!border-t-gray-900"
