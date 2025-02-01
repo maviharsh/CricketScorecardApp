@@ -3,7 +3,7 @@ import express from "express";
 import dotenv from "dotenv";
 import cors from "cors";
 
-import {coachrouter} from "./Routes/index.js"
+import {coachrouter, commentatorrouter, groundrouter, scorerrouter, shoprouter, streamerrouter, tshirtrouter, umpirerouter} from "./Routes/index.js"
 
 const app = express();
 dotenv.config();
@@ -39,6 +39,13 @@ app.get("/hi", (req, res) => {
 
 
 app.use('/api/coachform', coachrouter)
+app.use('/api/commentatorform', commentatorrouter)
+app.use('/api/groundform', groundrouter)
+app.use('/api/scorerform', scorerrouter)
+app.use('/api/shopform', shoprouter)
+app.use('/api/streamerform', streamerrouter)
+app.use('/api/tshirtform', tshirtrouter)
+app.use('/api/umpireform', umpirerouter)
 
 
 // Start server

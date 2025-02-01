@@ -158,31 +158,6 @@ export default function GroundForm() {
                   />
                 </div>
               </div>
-              <div className="mt-5">
-                <Typography
-                  variant="small"
-                  color="blue-gray"
-                  className="mb-2 font-medium"
-                >
-                  PITCH TYPE
-                </Typography>
-                
-                <CheckboxHorizontalListGroup first={"Turf"} second={"Matting"} third={"Cement"} />
-              </div>
-
-              <div className="mt-5">
-                <Typography
-                  variant="small"
-                  color="blue-gray"
-                  className="mb-2 font-medium"
-                >
-                  FACILITIES
-                </Typography>
-                
-                <CheckboxHorizontalListGroup first={"Umpires"} second={"Scorers"} third={"Water"} />
-                <CheckboxHorizontalListGroup first={"Nets"} second={"Lights"} third={"Balls"}/>
-                <CheckboxHorizontalListGroup first={"Toilet"} second={"Dugout"} third={"Cafe"}/>
-              </div>
               
               <div className="mt-5 flex items-center gap-4">
                 <div>
