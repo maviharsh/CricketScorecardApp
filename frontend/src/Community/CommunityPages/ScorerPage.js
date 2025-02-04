@@ -12,7 +12,7 @@ export default function GroundPage()
     useEffect(()=>{
            axios.get(`${process.env.REACT_APP_API_URL}/api/scorerform`)
            .then((scorer)=>{
-                     setScorers(scorer);
+                     setScorers(scorer.data);
            })
            .catch((err)=>console.log(err));
     },[])

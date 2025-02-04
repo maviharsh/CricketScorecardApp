@@ -196,7 +196,7 @@ export const routes=[
       element:
       <div>
           <Header />
-        <Form photo={"scorecard-svgrepo-com.svg"} />,
+        <Form photo={"scorecard-svgrepo-com.svg"} url={"scorerform"} destination={"/scorerpage"} />,
         <Footer />
         </div>
     },
@@ -205,7 +205,7 @@ export const routes=[
       element:
       <div>
           <Header />
-        <CoachForm photo={"manager-boss-svgrepo-com.svg"} />,
+        <CoachForm photo={"manager-boss-svgrepo-com.svg"} url={"coachform"} destination={"/coachpage"} />,
         <Footer />
         </div>
     },
@@ -214,7 +214,7 @@ export const routes=[
       element:
       <div>
           <Header />
-        <Form photo={"commentator-svgrepo-com.svg"} />,
+        <Form photo={"commentator-svgrepo-com.svg"} url={"commentatorform"} destination={"commentatorpage"} />,
         <Footer />
         </div>
     },
@@ -223,7 +223,7 @@ export const routes=[
       element:
       <div>
           <Header />
-        <Form photo={"stream-svgrepo-com.svg"} />,
+        <Form photo={"stream-svgrepo-com.svg"} url={"streamform"} destination={"streamerpage"} />,
         <Footer />
         </div>
     },
@@ -232,7 +232,7 @@ export const routes=[
       element:
       <div>
           <Header />
-        <CoachForm photo={"orange-tshirt-svgrepo-com.svg"} />,
+        <CoachForm photo={"orange-tshirt-svgrepo-com.svg"} url={"tshirtform"} destination={"tshirtpage"} />,
         <Footer />
         </div>
     },
@@ -241,7 +241,7 @@ export const routes=[
       element:
       <div>
           <Header />
-        <Form photo={"referee-svgrepo-com.svg"} />,
+        <Form photo={"referee-svgrepo-com.svg"} url={"umpireform"} destination={"umpirepage"} />,
         <Footer />
         </div>
     },
@@ -250,7 +250,7 @@ export const routes=[
       element:
       <div>
           <Header />
-        <CoachForm photo={"shops-shop-svgrepo-com.svg"} />,
+        <CoachForm photo={"shops-shop-svgrepo-com.svg"} url={"shopform"} destination={"shoppage"}/>,
         <Footer />
         </div>
     },

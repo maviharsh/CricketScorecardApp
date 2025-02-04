@@ -14,7 +14,7 @@ import {
 } from "@material-tailwind/react";
 
  
-export default function Form({photo}) {
+export default function Form({photo,url,destination}) {
 
   
    let [image, setImage] = useState(null);
@@ -53,7 +53,7 @@ export default function Form({photo}) {
      contact:""
   }
 
-  const CoachValidationSchema = Yup.object({
+  const FormValidationSchema = Yup.object({
     name: Yup.string().required("Please enter your name"),
     city: Yup.string().required("Please enter your city"),
     feesPD: Yup.number().required("Please enter daily fees").min(0, "Fees must be at least 0"),
@@ -63,10 +63,10 @@ export default function Form({photo}) {
 
   const {values,handleBlur,handleChange,handleSubmit,errors,resetForm}=useFormik({
     initialValues:initial,
-    validationSchema:CoachValidationSchema,
+    validationSchema:FormValidationSchema,
     onSubmit: async (e,{resetForm}) => {
      setLoading(true)
-     const response = await fetch(`${process.env.REACT_APP_API_URL}/api/coachform`, {
+     const response = await fetch(`${process.env.REACT_APP_API_URL}/api/${url}`, {
          method: "POST",
          headers: {
              "Content-Type": "application/json"
@@ -93,7 +93,7 @@ export default function Form({photo}) {
       setImageBase64("");
       fileInputRef.current.value = '';
       setLoading(false)
-      navigate("/individualpage");
+      navigate(`${destination}`);
       
    }
   })

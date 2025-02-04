@@ -35,7 +35,7 @@ export const umpire = async (req, res) => {
 };
 
 
-export const getcoach=async(req,res)=>{
+export const getumpire=async(req,res)=>{
          UmpireModel.find()
          .then((umpires)=>
             {

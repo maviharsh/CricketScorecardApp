@@ -1,4 +1,4 @@
-import Carding from "../Elements/Card";
+import Carding from "../Elements/GroundCard";
 
 import { Link } from "react-router-dom";
 import{Button} from '@material-tailwind/react';
@@ -12,7 +12,7 @@ export default function GroundPage()
     useEffect(()=>{
            axios.get(`${process.env.REACT_APP_API_URL}/api/groundform`)
            .then((ground)=>{
-                     setGrounds(ground);
+                     setGrounds(ground.data);
            })
            .catch((err)=>console.log(err));
     },[])
@@ -28,11 +28,16 @@ export default function GroundPage()
                            {grounds.map((ground, index) => (
                              <Carding
                                key={index} 
-                               name={ground.name}
+                               groundname={ground.groundname}
+                               personname={ground.personname}
+                               address={ground.address}
                                city={ground.city}
-                               feesPD={ground.feesPD}
-                               feesPM={ground.feesPM}
                                contact={ground.contact}
+                               gmail={ground.gmail}
+                               minboundary={ground.minboundary}
+                               maxboundary={ground.maxboundary}
+                               minfees={ground.minfees}
+                               maxfees={ground.maxfees}
                                src={ground.image.url}
                              />
                            ))}

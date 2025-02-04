@@ -12,7 +12,7 @@ export default function GroundPage()
     useEffect(()=>{
            axios.get(`${process.env.REACT_APP_API_URL}/api/umpireform`)
            .then((umpire)=>{
-                     setUmpires(umpire);
+                     setUmpires(umpire.data);
            })
            .catch((err)=>console.log(err));
     },[])

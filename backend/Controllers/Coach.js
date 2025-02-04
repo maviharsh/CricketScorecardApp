@@ -2,7 +2,7 @@ import { CoachModel } from '../Model/CoachModel.js';
 import { uploadToCloudinary } from '../Services/cloudinary.js';
 
 export const coach = async (req, res) => {
-    const { name, city, feesPM, feesPD, contact, image } = req.body;
+    const { companyname,personname,address,city,details,youtubelink,facebooklink,contact, image } = req.body;
     try {
         let imageData = {};
         if (image) {
@@ -19,11 +19,14 @@ export const coach = async (req, res) => {
         console.log("Image Data:", imageData); // Debugging
 
         const user = await CoachModel.create({
-            name,
+            companyname,
+            personname,
+            address,
             city,
-            feesPM,
-            feesPD,
             contact,
+            details,
+            youtubelink,
+            facebooklink,
             image: imageData,
         });
 

@@ -1,6 +1,6 @@
 import { Schema } from "mongoose";
 
-export const CoachSchema=new Schema({
+export const TShirtSchema=new Schema({
     companyname:{
         type:String,
         required: true,

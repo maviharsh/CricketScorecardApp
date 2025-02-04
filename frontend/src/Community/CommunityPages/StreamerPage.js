@@ -12,7 +12,7 @@ export default function GroundPage()
     useEffect(()=>{
            axios.get(`${process.env.REACT_APP_API_URL}/api/streamerform`)
            .then((streamer)=>{
-                     setStreamers(streamer);
+                     setStreamers(streamer.data);
            })
            .catch((err)=>console.log(err));
     },[])

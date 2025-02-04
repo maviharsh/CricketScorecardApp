@@ -1,6 +1,6 @@
 import { Schema } from "mongoose";
 
-export const CoachSchema=new Schema({
+export const UmpireSchema=new Schema({
     name:{
         type:String,
         required: true,

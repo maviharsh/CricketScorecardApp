@@ -1,6 +1,6 @@
 import { Schema } from "mongoose";
 
-export const CoachSchema=new Schema({
+export const GroundSchema=new Schema({
     groundname:{
         type:String,
         required: true,

@@ -1,4 +1,4 @@
-import Carding from "../Elements/Card";
+import Carding from "../Elements/CoachCard";
 
 import { Link } from "react-router-dom";
 import{Button} from '@material-tailwind/react';
@@ -37,11 +37,14 @@ export default function CoachPage()
         {coache.map((coach, index) => (
           <Carding
             key={index} 
-            name={coach.name}
+            companyname={coach.companyname}
+            personname={coach.personname}
+            address={coach.address}
             city={coach.city}
-            feesPD={coach.feesPD}
-            feesPM={coach.feesPM}
             contact={coach.contact}
+            details={coach.details}
+            youtubelink={coach.youtubelink}
+            facebooklink={coach.facebooklink}
             src={coach.image.url}
           />
         ))}

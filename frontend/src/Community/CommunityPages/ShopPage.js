@@ -1,4 +1,4 @@
-import Carding from "../Elements/Card";
+import Carding from "../Elements/CoachCard";
 
 import { Link } from "react-router-dom";
 import{Button} from '@material-tailwind/react';
@@ -12,7 +12,7 @@ export default function GroundPage()
     useEffect(()=>{
            axios.get(`${process.env.REACT_APP_API_URL}/api/shopform`)
            .then((shop)=>{
-                     setShops(shop);
+                     setShops(shop.data);
            })
            .catch((err)=>console.log(err));
     },[])
@@ -27,14 +27,17 @@ export default function GroundPage()
                            <div className="mt-4 mx-4 px-5 pt-5 flex  flex-wrap justify-evenly gap-32">
                            {shops.map((shop, index) => (
                              <Carding
-                               key={index} 
-                               name={shop.name}
-                               city={shop.city}
-                               feesPD={shop.feesPD}
-                               feesPM={shop.feesPM}
-                               contact={shop.contact}
-                               src={shop.image.url}
-                             />
+                                         key={index} 
+                                         companyname={shop.companyname}
+                                         personname={shop.personname}
+                                         address={shop.address}
+                                         city={shop.city}
+                                         contact={shop.contact}
+                                         details={shop.details}
+                                         youtubelink={shop.youtubelink}
+                                         facebooklink={shop.facebooklink}
+                                         src={shop.image.url}
+                                       />
                            ))}
                              </div>
            </>
