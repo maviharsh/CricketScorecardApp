@@ -1,5 +1,5 @@
 import React from "react";
-import CheckboxHorizontalListGroup from "../Community/Elements/Checkbox";
+import CheckboxHorizontalListGroup from "../../Community/Elements/Checkbox";
 import {
   Card,
   CardHeader,
@@ -10,7 +10,7 @@ import {
 } from "@material-tailwind/react";
 
  
-export default function TournamentParticipateForm({head,photo}) {
+export default function PlayerTeam({head,photo}) {
  
   return (
     <div className="p-5 flex justify-center">
@@ -22,46 +22,27 @@ export default function TournamentParticipateForm({head,photo}) {
         className="m-0 grid place-items-center px-4 py-8 text-center"
       >
         <div className="mb-4 h-20 p-6 text-white">
-          <img src={photo} alt="imagica" className="h-16"></img>
+          <img src="{photo}" alt="imagica" className="h-16"></img>
         </div>
         <Typography variant="h5" color="white">
           {head}
         </Typography>
       </CardHeader>
       <CardBody>
-                <form className="mt-4 flex flex-col gap-4">
- 
-                
-                <Typography
-                    variant="small"
-                    color="blue-gray"
-                    className="mt-5 font-medium"
-                  >
-                    MATCHES ON
-                  </Typography>
-                  <CheckboxHorizontalListGroup first={"Weekday"} second={"Weekend"} third={"All"} />
-                 
-                  <Typography
-                    variant="small"
-                    color="blue-gray"
-                    className="mt-5 font-medium"
-                  >
-                    MATCHES TIMINGS
-                  </Typography>
-                  <CheckboxHorizontalListGroup first={"Day"} second={"Night"} third={"Both"} />
-                 
-
-
-                <div className="my-3">
- 
+                <form className="mt-4 flex flex-col gap-1">
+                <div>
                   <Typography
                     variant="small"
                     color="blue-gray"
                     className="mb-2 font-medium"
                   >
-                    BALL TYPE
+                    ROLE
                   </Typography>
-                  <CheckboxHorizontalListGroup first={"Leather"} second={"Tennis"} third={"Other"} />
+                  <CheckboxHorizontalListGroup first={"Batter"} second={"Bowler"} third={"Allround"} />
+                </div>
+ 
+ 
+                  
                   <div className="my-4 flex items-center gap-4">
                     <div>
                       <Typography
@@ -96,11 +77,10 @@ export default function TournamentParticipateForm({head,photo}) {
                       />
                     </div>
                   </div>
-                  
                   <Typography
                     variant="small"
                     color="blue-gray"
-                    className="mb-2 font-medium"
+                    className="font-medium"
                   >
                     CONTACT NUMBER
                   </Typography>
@@ -111,8 +91,7 @@ export default function TournamentParticipateForm({head,photo}) {
                       className: "before:content-none after:content-none",
                     }}
                   />
-                </div>
-                <Button size="lg">POST</Button>
+                <Button size="lg" className="mt-4">POST</Button>
               </form>
       </CardBody>
     </Card>

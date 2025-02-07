@@ -1,4 +1,4 @@
-import LookingCard from "../LookingPage/LookingCard"
+import LookingCard from "../LookingPage/Elements/LookingCard"
 export default function CardPage()
 {
    return(

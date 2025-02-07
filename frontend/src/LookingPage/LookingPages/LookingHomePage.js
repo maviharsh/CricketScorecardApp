@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import LookingCard from "./LookingCard";
+import LookingCard from "../Elements/LookingCard";
 import{
    Button
 }

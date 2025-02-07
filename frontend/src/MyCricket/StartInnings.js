@@ -1,5 +1,5 @@
 import { Button } from "@material-tailwind/react";
-import Buttons from "../LookingPage/Buttons";
+import Buttons from "../LookingPage/Elements/Buttons";
 import { Link } from "react-router-dom";
 
 export default function StartInnings({team1,team2}){
