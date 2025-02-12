@@ -9,7 +9,7 @@ import {
 } from "@material-tailwind/react";
 
  
-export default function OpponentForm({head,photo}) {
+export default function OpponentForm({photo}) {
  
   return (
     <div className="p-5 flex justify-center">
@@ -23,9 +23,7 @@ export default function OpponentForm({head,photo}) {
         <div className="mb-4 h-20 p-6 text-white">
           <img src={photo} alt="imagica" className="h-16"></img>
         </div>
-        <Typography variant="h5" color="white">
-          {head}
-        </Typography>
+       
       </CardHeader>
       <CardBody>
                 <form className="mt-4 flex flex-col gap-4">

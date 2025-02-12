@@ -99,15 +99,6 @@ export const routes=[
         </div>
     },
     {
-      path:"/bottomform",
-      element:
-      <div>
-          <Header />
-        <BottomForm />,
-        <Footer />
-        </div>
-    },
-    {
       path:"/mystats",
       element:
       <div>
@@ -273,20 +264,20 @@ export const routes=[
       </div>
     },
     {
-      path:"/tournamentform",
+      path:"/teamsfortournamentform",
       element:
       <div>
         <Header />
-         <TournamentForm/>      
+         <TournamentForm photo={"team-group-svgrepo-com.svg"}/>      
         <Footer />
       </div>
     },
     {
-      path:"/participateform",
+      path:"/tournamenttoparticipateform",
       element:
       <div>
         <Header />
-         <TournamentParticipateForm/>      
+         <TournamentParticipateForm photo={"trophy-svgrepo-com (1).svg"}/>      
         <Footer />
       </div>
     },
@@ -295,18 +286,54 @@ export const routes=[
       element:
       <div>
         <Header />
-         <OpponentForm/>      
+         <OpponentForm photo={"vs-button-svgrepo-com.svg"}/>      
         <Footer />
       </div>
     },
     {
-      path:"/playerteamform",
+      path:"/teamforplayerform",
       element:
       <div>
         <Header />
-         <PlayerTeam/>      
+         <PlayerTeam photo={"network-teamwork-svgrepo-com.svg"}/>      
         <Footer />
       </div>
+    },
+    {
+      path:"/playerforteamform",
+      element:
+      <div>
+        <Header />
+         <PlayerTeam photo={"man-red-hair-svgrepo-com.svg"}/>      
+        <Footer />
+      </div>
+    },
+    {
+      path:"/lookinggroundform",
+      element:
+      <div>
+          <Header />
+        <BottomForm photo={"cricket-ground-cricket-svgrepo-com.svg"} />,
+        <Footer />
+        </div>
+    },
+    {
+      path:"/lookingumpireform",
+      element:
+      <div>
+          <Header />
+        <BottomForm photo={"person-blond-hair-svgrepo-com.svg"}/>,
+        <Footer />
+        </div>
+    },
+    {
+      path:"/lookingscorerform",
+      element:
+      <div>
+          <Header />
+        <BottomForm photo={"score-svgrepo-com.svg"}/>,
+        <Footer />
+        </div>
     },
     {
       path:"/startmatch",

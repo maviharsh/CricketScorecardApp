@@ -9,7 +9,7 @@ import {
   Typography,
 } from "@material-tailwind/react";
 
-export default function TournamentParticipateForm({ head, photo }) {
+export default function TournamentParticipateForm({ photo }) {
   return (
     <div className="p-5 flex justify-center">
       <Card className="w-full max-w-[24rem]">
@@ -22,9 +22,7 @@ export default function TournamentParticipateForm({ head, photo }) {
           <div className="mb-4 h-20 p-6 text-white">
             <img src={photo} alt="imagica" className="h-16"></img>
           </div>
-          <Typography variant="h5" color="white">
-            {head}
-          </Typography>
+         
         </CardHeader>
         <CardBody>
           <form className="flex flex-col gap-3">

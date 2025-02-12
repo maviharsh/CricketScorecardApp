@@ -9,7 +9,7 @@ import {
 } from "@material-tailwind/react";
 
  
-export default function BottomForm({head,photo}) {
+export default function BottomForm({photo}) {
  
   return (
     <div className="p-5 flex justify-center">
@@ -21,11 +21,8 @@ export default function BottomForm({head,photo}) {
         className="m-0 grid place-items-center px-4 py-8 text-center"
       >
         <div className="mb-4 h-20 p-6 text-white">
-          <img src="{photo}" alt="imagica" className="h-16"></img>
+          <img src={photo} alt="imagica" className="h-16"></img>
         </div>
-        <Typography variant="h5" color="white">
-          {head}
-        </Typography>
       </CardHeader>
       <CardBody>
                 <form className="mt-4 flex flex-col gap-4">
