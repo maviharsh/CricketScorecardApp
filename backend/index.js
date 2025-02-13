@@ -3,7 +3,9 @@ import express from "express";
 import dotenv from "dotenv";
 import cors from "cors";
 
-import {coachrouter, commentatorrouter, groundrouter, scorerrouter, shoprouter, streamerrouter, tshirtrouter, umpirerouter} from "./Routes/CommunityRoutes/index.js"
+import {coachrouter, commentatorrouter, groundrouter, scorerrouter, shoprouter, streamerrouter, tshirtrouter, umpirerouter} from "./Routes/index.js"  //COMMUNITY ROUTERS
+import {groundlookingrouter, opponentrouter, playerforteamrouter, scorerlookingrouter, teamforplayerrouter, teamsfortournamentrouter, tournamenttoparticipaterouter, umpirelookingrouter} from "./Routes/index.js"  //LOOKING ROUTERS
+
 
 const app = express();
 dotenv.config();
@@ -37,7 +39,7 @@ app.get("/hi", (req, res) => {
     res.send("Hi");
 });
 
-
+//COMMUNITY ROUTES
 app.use('/api/coachform', coachrouter)
 app.use('/api/commentatorform', commentatorrouter)
 app.use('/api/groundform', groundrouter)
@@ -47,6 +49,15 @@ app.use('/api/streamerform', streamerrouter)
 app.use('/api/tshirtform', tshirtrouter)
 app.use('/api/umpireform', umpirerouter)
 
+//LOOKING ROUTES
+app.use('/api/groundlookingform', groundlookingrouter)
+app.use('/api/opponentform', opponentrouter)
+app.use('/api/playerforteamform', playerforteamrouter)
+app.use('/api/scorerlookingform', scorerlookingrouter)
+app.use('/api/teamforplayerform', teamforplayerrouter)
+app.use('/api/teamsfortournamentform', teamsfortournamentrouter)
+app.use('/api/tournamenttoparticipateform', tournamenttoparticipaterouter)
+app.use('/api/umpirelookingform', umpirelookingrouter)
 
 // Start server
 app.listen(port, () => {
