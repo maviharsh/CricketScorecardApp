@@ -1,6 +1,9 @@
 import { Schema } from "mongoose";
 
 export const UmpireLookingSchema=new Schema({
+    name:{
+        type:String,
+    },
     date:{
           type:Date,
           required:true,

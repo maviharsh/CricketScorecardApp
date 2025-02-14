@@ -295,7 +295,7 @@ export const routes=[
       element:
       <div>
         <Header />
-         <PlayerTeam photo={"network-teamwork-svgrepo-com.svg"}/>      
+         <PlayerTeam photo={"network-teamwork-svgrepo-com.svg"} url={"teamforplayerform"}/>      
         <Footer />
       </div>
     },
@@ -304,7 +304,7 @@ export const routes=[
       element:
       <div>
         <Header />
-         <PlayerTeam photo={"man-red-hair-svgrepo-com.svg"}/>      
+         <PlayerTeam photo={"man-red-hair-svgrepo-com.svg"} url={"playerforteamform"}/>      
         <Footer />
       </div>
     },
@@ -313,7 +313,7 @@ export const routes=[
       element:
       <div>
           <Header />
-        <BottomForm photo={"cricket-ground-cricket-svgrepo-com.svg"} />,
+        <BottomForm photo={"cricket-ground-cricket-svgrepo-com.svg"} url={"groundlookingform"} />,
         <Footer />
         </div>
     },
@@ -322,7 +322,7 @@ export const routes=[
       element:
       <div>
           <Header />
-        <BottomForm photo={"person-blond-hair-svgrepo-com.svg"}/>,
+        <BottomForm photo={"person-blond-hair-svgrepo-com.svg"} url={"umpirelookingform"}/>,
         <Footer />
         </div>
     },
@@ -331,7 +331,7 @@ export const routes=[
       element:
       <div>
           <Header />
-        <BottomForm photo={"score-svgrepo-com.svg"}/>,
+        <BottomForm photo={"score-svgrepo-com.svg"} url={"scorerlookingform"}/>,
         <Footer />
         </div>
     },

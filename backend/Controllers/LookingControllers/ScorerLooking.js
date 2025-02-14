@@ -19,6 +19,7 @@ export const scorer = async (req, res) => {
         console.log("Image Data:", imageData); // Debugging
 
         const user = await ScorerLookingModel.create({
+            name:"Scorers",
             date,
             address,
             city,
@@ -35,7 +36,7 @@ export const scorer = async (req, res) => {
 
 
 export const getscorer=async(req,res)=>{
-         ScorerLookingModels.find()
+         ScorerLookingModel.find()
          .then((scorers)=>
             {
                 res.json(scorers);

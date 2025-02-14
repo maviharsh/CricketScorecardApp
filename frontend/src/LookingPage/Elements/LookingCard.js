@@ -1,49 +1,66 @@
-import {
-    Card,
-    CardBody,
-    CardFooter,
-    Typography,
-    Button,
-  } from "@material-tailwind/react";
+import { Card, CardBody, Typography } from "@material-tailwind/react";
 
-  
-  export default function LookingCard() {
-    return (
-      <Card className="mt-6 w-96">
-        <CardBody>
-            <button>
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            viewBox="0 0 24 24"
-            fill="currentColor"
-            className="mb-4 h-12 w-12 text-gray-900"
-          >
-            <path
-              fillRule="evenodd"
-              d="M9.315 7.584C12.195 3.883 16.695 1.5 21.75 1.5a.75.75 0 01.75.75c0 5.056-2.383 9.555-6.084 12.436A6.75 6.75 0 019.75 22.5a.75.75 0 01-.75-.75v-4.131A15.838 15.838 0 016.382 15H2.25a.75.75 0 01-.75-.75 6.75 6.75 0 017.815-6.666zM15 6.75a2.25 2.25 0 100 4.5 2.25 2.25 0 000-4.5z"
-              clipRule="evenodd"
-            />
-            <path d="M5.26 17.242a.75.75 0 10-.897-1.203 5.243 5.243 0 00-2.05 5.022.75.75 0 00.625.627 5.243 5.243 0 005.022-2.051.75.75 0 10-1.202-.897 3.744 3.744 0 01-3.008 1.51c0-1.23.592-2.323 1.51-3.008z" />
-          </svg>
-          </button>
+export default function LookingCard({ data }) {
+  return (
+    <Card className="mt-6 w-96">
+      <CardBody>
+        <div className="flex items-center justify-center p-5">
+          <img src={data.image.url} alt="imagica" className="h-50 w-50"></img>
+        </div>
+
+        <div className="flex items-center justify-center">
           <Typography variant="h5" color="blue-gray" className="mb-2">
-            Opponent
+            {data.name}
           </Typography>
-          <Typography>
-            <ul className="p-2 list-disc">
+        </div>
+
+        <Typography>
+          <div className="flex justify-center items-center">
+            <ul className="p-2">
+              {data.tournamentname && (
+                <li>
+                  <strong className="underline">TournamentName:</strong> {data.tournamentname}
+                </li>
+              )}
+              {data.matcheson && (
+                <li>
+                  <strong className="underline">MatchsOn:</strong>
+                  <ul className="list-disc">
+                    {data.matcheson.map((match, index) => (
+                      <li key={index}>{match}</li>
+                    ))}
+                  </ul>
+                </li>
+              )}
+
+              {data.role && (
+                <li>
+                  <strong className="underline">Role:</strong> {data.role}
+                </li>
+              )}
               <li>
-                Israel's Team is looking for an opponent to play a match
+                <strong className="underline">Address:</strong> {data.address}
               </li>
               <li>
-                Sat,Dec 21 2024|5:34 PM
+                <strong className="underline">City:</strong> {data.city}
               </li>
+              {data.date && (
+                <li>
+                  <strong className="underline">Date:</strong> {data.date}
+                </li>
+              )}
+              {data.time && (
+                <li>
+                  <strong className="underline">Time:</strong> {data.time}
+                </li>
+              )}
               <li>
-                Open Ground
+                <strong className="underline">Contact:</strong> {data.contact}
               </li>
             </ul>
-          </Typography>
-        </CardBody>
-        
-      </Card>
-    );
-  }
+          </div>
+        </Typography>
+      </CardBody>
+    </Card>
+  );
+}

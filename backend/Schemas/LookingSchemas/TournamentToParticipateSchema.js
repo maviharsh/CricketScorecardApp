@@ -2,8 +2,11 @@ import { Schema } from "mongoose";
 
 export const TournamentToParticipateSchema = new Schema(
   {
+    name:{
+      type:String,
+  },
     matcheson: {
-      type: String,
+      type: Array,
       required: true,
     },
     address: {

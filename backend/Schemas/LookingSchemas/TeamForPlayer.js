@@ -1,8 +1,11 @@
 import { Schema } from "mongoose";
 
 export const TeamForPlayerSchema=new Schema({
+    name:{
+        type:String,
+    },
     role:{
-          type:String,
+          type:Array,
           required:true,
     },
     address:{

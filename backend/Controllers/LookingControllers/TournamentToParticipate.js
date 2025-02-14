@@ -19,6 +19,7 @@ export const tournamenttoparticipate = async (req, res) => {
         console.log("Image Data:", imageData); // Debugging
 
         const user = await TournamentToParticipateModel.create({
+            name:"TournamentsToParticipate",
             matcheson,
             address,
             city,

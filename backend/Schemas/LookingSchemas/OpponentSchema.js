@@ -1,12 +1,15 @@
 import { Schema } from "mongoose";
 
 export const OpponentSchema=new Schema({
+    name:{
+        type:String,
+    },
     date:{
           type:Date,
           required:true,
     },
     time:{
-        type:Date,
+        type:String,
         required:true,
     },
     address:{

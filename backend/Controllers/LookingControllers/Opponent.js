@@ -18,7 +18,8 @@ export const opponent = async (req, res) => {
 
         console.log("Image Data:", imageData); // Debugging
 
-        const user = await GroundLookingModel.create({
+        const user = await OpponentModel.create({
+            name:"Opponents",
             date,
             time,
             address,

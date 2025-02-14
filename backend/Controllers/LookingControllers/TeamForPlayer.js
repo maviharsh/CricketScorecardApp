@@ -19,6 +19,7 @@ export const teamforplayer = async (req, res) => {
         console.log("Image Data:", imageData); // Debugging
 
         const user = await TeamForPlayerModel.create({
+            name:"TeamsForPlayer",
             role,
             address,
             city,

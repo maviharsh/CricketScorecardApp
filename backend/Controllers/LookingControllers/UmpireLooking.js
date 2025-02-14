@@ -19,6 +19,7 @@ export const umpire = async (req, res) => {
         console.log("Image Data:", imageData); // Debugging
 
         const user = await UmpireLookingModel.create({
+            name:"Umpires",
             date,
             address,
             city,

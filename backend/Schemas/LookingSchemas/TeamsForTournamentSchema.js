@@ -2,12 +2,15 @@ import { Schema } from "mongoose";
 
 export const TeamsForTournamentSchema = new Schema(
   {
+    name:{
+      type:String,
+  },
     tournamentname: {
       type: String,
       required: true,
     },
     matcheson: {
-      type: String,
+      type: Array,
       required: true,
     },
     date: {

@@ -19,6 +19,7 @@ export const ground = async (req, res) => {
         console.log("Image Data:", imageData); // Debugging
 
         const user = await GroundLookingModel.create({
+            name:"Grounds",
             date,
             address,
             city,
