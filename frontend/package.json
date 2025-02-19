@@ -63,6 +63,9 @@
   "react-scripts": "5.0.1",
   
     
+  "react-toastify": "^11.0.3",
+  
+    
   "use-react-countries": "^2.0.1",
   
     

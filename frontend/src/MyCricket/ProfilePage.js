@@ -16,10 +16,7 @@ export default function PersonalProfile() {
                   <MDBCardImage src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava1-bg.webp"
                     alt="Avatar" className="my-5" style={{ width: '80px' }} fluid />
                   <MDBTypography tag="h5">Harsh Mavi</MDBTypography>
-                  <MDBCardText>Left-Hand-Batsman</MDBCardText>
-                  </div>
-                  <MDBIcon far icon="edit mb-5" />
-                  
+                  </div>                  
                 </MDBCol>
                 <MDBCol md="8">
                   <MDBCardBody className="p-4">
@@ -27,17 +24,16 @@ export default function PersonalProfile() {
                     <hr className="mt-0 mb-4" />
                     <MDBRow className="pt-1">
                       <MDBCol size="6" className="mb-3">
-                        <MDBTypography tag="h6">Email</MDBTypography>
-                        <MDBCardText className="text-muted">maviharsh@gmail.com</MDBCardText>
+                        <MDBTypography tag="h6">Role</MDBTypography>
+                        <MDBCardText className="text-muted">Batsman</MDBCardText>
                       </MDBCol>
                       <MDBCol size="6" className="mb-3">
-                        <MDBTypography tag="h6">Phone</MDBTypography>
-                        <MDBCardText className="text-muted">7827903868</MDBCardText>
+                        <MDBTypography tag="h6">D.O.B</MDBTypography>
+                        <MDBCardText className="text-muted">26-08-2003</MDBCardText>
                       </MDBCol>
                     </MDBRow>
 
-                    <MDBTypography tag="h6">Information</MDBTypography>
-                    <hr className="mt-0 mb-4" />
+                   
                     <MDBRow className="pt-1">
                       <MDBCol size="6" className="mb-3">
                         <MDBTypography tag="h6">Email</MDBTypography>
@@ -49,11 +45,6 @@ export default function PersonalProfile() {
                       </MDBCol>
                     </MDBRow>
 
-                    <div className="d-flex justify-content-start">
-                      <a href="#!"><MDBIcon fab icon="facebook me-3" size="lg" /></a>
-                      <a href="#!"><MDBIcon fab icon="twitter me-3" size="lg" /></a>
-                      <a href="#!"><MDBIcon fab icon="instagram me-3" size="lg" /></a>
-                    </div>
                   </MDBCardBody>
                 </MDBCol>
               </MDBRow>

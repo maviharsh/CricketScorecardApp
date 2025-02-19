@@ -41,6 +41,8 @@ import ScorerPage from './Community/CommunityPages/ScorerPage.js';
 import ShopPage from './Community/CommunityPages/ShopPage.js';
 import StreamerPage from './Community/CommunityPages/StreamerPage.js';
 import TShirtPage from './Community/CommunityPages/TShirtPage.js';
+import RegisterForm from './AuthenticationForms/RegisterForm.js';
+import LoginForm from './AuthenticationForms/LoginForm.js';
 
 
 export const routes=[
@@ -413,6 +415,25 @@ export const routes=[
       </div>
     },
     {
+      path:"/register",
+      element:
+      <div>
+        <Header />
+        <RegisterForm />
+        <Footer />
+      </div>
+    },
+    {
+      path:"/login",
+      element:
+      <div>
+        <Header />
+        <LoginForm />
+        <Footer />
+      </div>
+    },
+    {
+
           path:"*",
           element:
           <div>
