@@ -12,7 +12,8 @@ import {
   AccordionHeader,
   AccordionBody,
   Drawer,
-  Card
+  Card,
+  Button,
 } from "@material-tailwind/react";
 import {
   UserCircleIcon,
@@ -25,18 +26,40 @@ import {
   Bars3Icon,
   XMarkIcon,
 } from "@heroicons/react/24/outline";
- 
-export default function SidebarWithBurgerMenu({imag,name}) {
+
+export default function SidebarWithBurgerMenu({ imag, name }) {
   const [open, setOpen] = React.useState(0);
   const [isDrawerOpen, setIsDrawerOpen] = React.useState(false);
- 
+
   const handleOpen = (value) => {
     setOpen(open === value ? 0 : value);
   };
- 
+
   const openDrawer = () => setIsDrawerOpen(true);
   const closeDrawer = () => setIsDrawerOpen(false);
- 
+
+  const handleclick = async () => {
+    try {
+      const response = await fetch(
+        `${process.env.REACT_APP_API_URL}/api/loginform/logout`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          credentials: "include",
+        }
+      );
+      if (response.ok) {
+        console.log("logout done successfuly");
+      } else {
+        console.log("logout unsuccessful");
+      }
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
   return (
     <>
       <IconButton variant="text" size="lg" color="white" onClick={openDrawer}>
@@ -53,16 +76,12 @@ export default function SidebarWithBurgerMenu({imag,name}) {
           className="h-[calc(100vh-2rem)] w-full p-4"
         >
           <div className="mb-2 flex items-center gap-4 p-4">
-            <img
-              src={imag}
-              alt="brand"
-              className="h-6 w-6"
-            />
+            <img src={imag} alt="brand" className="h-6 w-6" />
             <Typography variant="h5" color="blue-gray">
               {name}
             </Typography>
           </div>
-          
+
           <List>
             <Accordion
               open={open === 1}
@@ -81,7 +100,11 @@ export default function SidebarWithBurgerMenu({imag,name}) {
                   className="border-b-0 p-3"
                 >
                   <ListItemPrefix>
-                    <img src="cricket-game-svgrepo-com.svg" alt="" className="h-5"></img>
+                    <img
+                      src="cricket-game-svgrepo-com.svg"
+                      alt=""
+                      className="h-5"
+                    ></img>
                   </ListItemPrefix>
                   <Typography color="blue-gray" className="mr-auto font-normal">
                     My Cricket
@@ -90,34 +113,34 @@ export default function SidebarWithBurgerMenu({imag,name}) {
               </ListItem>
               <AccordionBody className="py-1">
                 <List className="p-0">
-                <Link to="/mycricket">
-                  <ListItem>
-                    <ListItemPrefix>
-                      <ChevronRightIcon strokeWidth={3} className="h-3 w-5" />
-                    </ListItemPrefix>
-                    My Matches
-                  </ListItem>
+                  <Link to="/mycricket">
+                    <ListItem>
+                      <ListItemPrefix>
+                        <ChevronRightIcon strokeWidth={3} className="h-3 w-5" />
+                      </ListItemPrefix>
+                      My Matches
+                    </ListItem>
                   </Link>
                   <Link to="/mystats">
-                  <ListItem>
-                    <ListItemPrefix>
-                      <ChevronRightIcon strokeWidth={3} className="h-3 w-5" />
-                    </ListItemPrefix>
-                    My Stats
-                  </ListItem>
+                    <ListItem>
+                      <ListItemPrefix>
+                        <ChevronRightIcon strokeWidth={3} className="h-3 w-5" />
+                      </ListItemPrefix>
+                      My Stats
+                    </ListItem>
                   </Link>
                   <Link to="/myteams">
-                  <ListItem>
-                    <ListItemPrefix>
-                      <ChevronRightIcon strokeWidth={3} className="h-3 w-5" />
-                    </ListItemPrefix>
-                    My Teams
-                  </ListItem>
+                    <ListItem>
+                      <ListItemPrefix>
+                        <ChevronRightIcon strokeWidth={3} className="h-3 w-5" />
+                      </ListItemPrefix>
+                      My Teams
+                    </ListItem>
                   </Link>
                 </List>
               </AccordionBody>
             </Accordion>
-            
+
             <hr className="my-2 border-blue-gray-50" />
             <ListItem>
               <ListItemPrefix>
@@ -135,24 +158,28 @@ export default function SidebarWithBurgerMenu({imag,name}) {
               </ListItemSuffix>
             </ListItem>
             <Link to="/profilepage">
-            <ListItem>
-              <ListItemPrefix>
-                <UserCircleIcon className="h-5 w-5" />
-              </ListItemPrefix>
-              Profile
-            </ListItem>
+              <ListItem>
+                <ListItemPrefix>
+                  <UserCircleIcon className="h-5 w-5" />
+                </ListItemPrefix>
+                Profile
+              </ListItem>
             </Link>
             <Link to="/startmatch">
-            <ListItem>
-              <ListItemPrefix>
-                <img src="cricket-svgrepo-com.svg" className="h-4" alt="imagica"></img>
-              </ListItemPrefix>
-              Start A Match
-            </ListItem>
+              <ListItem>
+                <ListItemPrefix>
+                  <img
+                    src="cricket-svgrepo-com.svg"
+                    className="h-4"
+                    alt="imagica"
+                  ></img>
+                </ListItemPrefix>
+                Start A Match
+              </ListItem>
             </Link>
-            <ListItem>
+            <ListItem onClick={handleclick}>
               <ListItemPrefix>
-                <PowerIcon className="h-5 w-5" />
+                <PowerIcon className="h-5 w-5"  />
               </ListItemPrefix>
               Log Out
             </ListItem>

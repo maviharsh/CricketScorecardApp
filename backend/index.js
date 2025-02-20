@@ -2,6 +2,7 @@ import mongoose from "mongoose";
 import express from "express";
 import dotenv from "dotenv";
 import cors from "cors";
+import cookieParser from "cookie-parser";
 
 import {coachrouter, commentatorrouter, groundrouter, loginrouter, scorerrouter, shoprouter, streamerrouter, tshirtrouter, umpirerouter} from "./Routes/index.js"  //COMMUNITY ROUTERS
 import {groundlookingrouter, opponentrouter, playerforteamrouter, scorerlookingrouter, teamforplayerrouter, teamsfortournamentrouter, tournamenttoparticipaterouter, umpirelookingrouter} from "./Routes/index.js"  //LOOKING ROUTERS
@@ -13,7 +14,11 @@ dotenv.config();
 
 app.use(express.json({ limit: "50mb" }));
 app.use(express.urlencoded({ limit: "50mb", extended: true }));
-app.use(cors());
+app.use(cors({
+    origin: "http://localhost:3000", // Your React frontend URL
+    credentials: true
+  }));
+app.use(cookieParser());
 app.use((req, res, next) => {
     console.log(req.path, req.method)
     next()
@@ -39,6 +44,11 @@ app.get("/", (req, res) => {
 app.get("/hi", (req, res) => {
     res.send("Hi");
 });
+
+app.get('/test-cookie', (req, res) => {
+    res.cookie("test", "value", { httpOnly: true });
+    res.send("Cookie set");
+  });
 
 //COMMUNITY ROUTES
 app.use('/api/coachform', coachrouter)

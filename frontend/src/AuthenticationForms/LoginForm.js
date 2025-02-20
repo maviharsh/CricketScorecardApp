@@ -43,7 +43,9 @@ export default function LoginForm() {
             email: values.email,
             password: values.password,
           }),
-        });
+          credentials:"include",
+        }
+      );
     
         const json = await response.json();
     
@@ -103,6 +105,7 @@ export default function LoginForm() {
               onBlur={handleBlur}
             />
           </div>
+          <ToastContainer />
           <div className="mb-6">
             <label htmlFor="password">
               <Typography
