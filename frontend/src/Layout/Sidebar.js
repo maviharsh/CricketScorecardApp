@@ -1,5 +1,5 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link,useNavigate } from "react-router-dom";
 import {
   IconButton,
   Typography,
@@ -13,7 +13,6 @@ import {
   AccordionBody,
   Drawer,
   Card,
-  Button,
 } from "@material-tailwind/react";
 import {
   UserCircleIcon,
@@ -27,9 +26,14 @@ import {
   XMarkIcon,
 } from "@heroicons/react/24/outline";
 
+import { useState,useContext } from "react";
+import {AuthContext} from "../index.js";
+
 export default function SidebarWithBurgerMenu({ imag, name }) {
-  const [open, setOpen] = React.useState(0);
-  const [isDrawerOpen, setIsDrawerOpen] = React.useState(false);
+  const [open, setOpen] = useState(0);
+  const [isDrawerOpen, setIsDrawerOpen] = useState(false);
+  const navigate=useNavigate();
+  const { isAuthenticated, setIsAuthenticated } = useContext(AuthContext);
 
   const handleOpen = (value) => {
     setOpen(open === value ? 0 : value);
@@ -39,6 +43,12 @@ export default function SidebarWithBurgerMenu({ imag, name }) {
   const closeDrawer = () => setIsDrawerOpen(false);
 
   const handleclick = async () => {
+
+    if(!isAuthenticated)
+    {
+        navigate("/login");   
+    }
+    else{
     try {
       const response = await fetch(
         `${process.env.REACT_APP_API_URL}/api/loginform/logout`,
@@ -51,6 +61,7 @@ export default function SidebarWithBurgerMenu({ imag, name }) {
         }
       );
       if (response.ok) {
+        setIsAuthenticated(false);
         console.log("logout done successfuly");
       } else {
         console.log("logout unsuccessful");
@@ -59,6 +70,7 @@ export default function SidebarWithBurgerMenu({ imag, name }) {
       console.log(err);
     }
   };
+}
 
   return (
     <>
@@ -177,11 +189,11 @@ export default function SidebarWithBurgerMenu({ imag, name }) {
                 Start A Match
               </ListItem>
             </Link>
-            <ListItem onClick={handleclick}>
+            <ListItem onClick={handleclick} >
               <ListItemPrefix>
                 <PowerIcon className="h-5 w-5"  />
               </ListItemPrefix>
-              Log Out
+              {isAuthenticated?"Logout":"Login"}
             </ListItem>
           </List>
         </Card>

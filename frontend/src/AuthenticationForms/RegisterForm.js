@@ -1,16 +1,18 @@
 import { Card, Input, Button, Typography } from "@material-tailwind/react";
-import { useState, useRef } from "react";
+import { useState, useRef, useContext } from "react";
 import { Link } from "react-router-dom";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import { useNavigate } from "react-router-dom";
 import {toast,ToastContainer} from 'react-toastify';
+import { AuthContext } from "../index.js";
 
 export default function RegisterForm() {
   let [image, setImage] = useState(null);
   let [imageBase64, setImageBase64] = useState("");
   let [loading, setLoading] = useState(false);
   let [data, setData] = useState(null);
+  let {isAuthenticated, setIsAuthenticated}=useContext(AuthContext);
 
   const fileInputRef = useRef();
 
@@ -75,6 +77,7 @@ export default function RegisterForm() {
             contact: values.contact,
             image: imageBase64,
           }),
+          credentials:"include",
         });
     
         const json = await response.json();
@@ -90,8 +93,9 @@ export default function RegisterForm() {
         resetForm();
         setImage(null);
         setImageBase64("");
+        setIsAuthenticated(true);
         fileInputRef.current.value = "";
-        navigate(""); // Adjust navigation as needed
+        navigate("/"); // Adjust navigation as needed
       } catch (error) {
         console.error("Signup error:", error.message);
         toast(error.message);

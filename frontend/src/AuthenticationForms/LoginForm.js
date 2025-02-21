@@ -1,4 +1,4 @@
-import { useState,useRef} from "react";
+import { useState,useRef, useContext} from "react";
 
 import { Typography, Input, Button } from "@material-tailwind/react";
 import { EyeSlashIcon, EyeIcon } from "@heroicons/react/24/solid";
@@ -8,13 +8,15 @@ import { useFormik } from "formik";
 import * as Yup from "yup";
 import { useNavigate } from "react-router-dom";
 import {toast,ToastContainer} from 'react-toastify';
+import { AuthContext } from "../index.js";
 
 export default function LoginForm() {
   const [passwordShown, setPasswordShown] = useState(false);
   const togglePasswordVisiblity = () => setPasswordShown((cur) => !cur);
   let [loading, setLoading] = useState(false);
   let [data, setData] = useState(null);
-  
+  const { isAuthenticated, setIsAuthenticated } = useContext(AuthContext);
+
   const navigate = useNavigate();
 
   const initial ={
@@ -58,7 +60,8 @@ export default function LoginForm() {
     
         // Success actions
         resetForm();
-        navigate(""); // Adjust navigation as needed
+        setIsAuthenticated(true);
+        navigate("/");
       } catch (error) {
         console.error("Signup error:", error.message);
         toast(error.message);
