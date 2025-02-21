@@ -1,7 +1,7 @@
 import { User } from '../../Model/MyCricketModels/UserModel.js';
 import { uploadToCloudinary } from '../../Services/cloudinary.js';
 import bcrypt from "bcrypt";
-
+import jwt from "jsonwebtoken";
 
 export const user = async (req, res) => {
     const { name,role,dob,contact,email,password, image } = req.body;
@@ -47,6 +47,14 @@ export const user = async (req, res) => {
         });
        
         console.log("document saved");
+        const token=jwt.sign({"email":email},process.env.JWT_SECRET);
+        console.log(token);
+        res.cookie("token",token,{
+          httpOnly: true,       // Prevents client-side JS access
+          secure: false,        // Secure flag for HTTPS
+          sameSite: "lax"       // Adjust to your CORS needs ('lax' is a safe default)
+        });
+        
         return res.status(200).json(user);
     }
         
