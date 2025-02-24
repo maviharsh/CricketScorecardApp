@@ -15,4 +15,6 @@ export {teamsfortournamentrouter} from "./LookingRoutes/TeamsForTournament.js";
 export {tournamenttoparticipaterouter} from "./LookingRoutes/TournamentToParticipate.js";
 export {umpirelookingrouter} from "./LookingRoutes/UmpireLooking.js";
 export {userrouter} from "./MyCricketRoutes/User.js";
-export {loginrouter} from "./MyCricketRoutes/Login.js"
+export {loginrouter} from "./MyCricketRoutes/Login.js";
+export {signuprouter} from "./MyCricketRoutes/Signup.js";
+

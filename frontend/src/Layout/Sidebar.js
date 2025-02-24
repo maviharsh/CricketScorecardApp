@@ -26,14 +26,12 @@ import {
   XMarkIcon,
 } from "@heroicons/react/24/outline";
 
-import { useState,useContext } from "react";
-import {AuthContext} from "../index.js";
+import { useState } from "react";
 
 export default function SidebarWithBurgerMenu({ imag, name }) {
   const [open, setOpen] = useState(0);
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
   const navigate=useNavigate();
-  const { isAuthenticated, setIsAuthenticated } = useContext(AuthContext);
 
   const handleOpen = (value) => {
     setOpen(open === value ? 0 : value);
@@ -44,12 +42,7 @@ export default function SidebarWithBurgerMenu({ imag, name }) {
 
   const handleclick = async () => {
 
-    if(!isAuthenticated)
-    {
-        navigate("/login");   
-    }
-    else{
-    try {
+       try {
       const response = await fetch(
         `${process.env.REACT_APP_API_URL}/api/loginform/logout`,
         {
@@ -61,15 +54,15 @@ export default function SidebarWithBurgerMenu({ imag, name }) {
         }
       );
       if (response.ok) {
-        setIsAuthenticated(false);
         console.log("logout done successfuly");
+        navigate("/login")
       } else {
         console.log("logout unsuccessful");
       }
     } catch (err) {
       console.log(err);
     }
-  };
+  
 }
 
   return (
@@ -193,8 +186,8 @@ export default function SidebarWithBurgerMenu({ imag, name }) {
               <ListItemPrefix>
                 <PowerIcon className="h-5 w-5"  />
               </ListItemPrefix>
-              {isAuthenticated?"Logout":"Login"}
-            </ListItem>
+                  logout  
+           </ListItem>
           </List>
         </Card>
       </Drawer>

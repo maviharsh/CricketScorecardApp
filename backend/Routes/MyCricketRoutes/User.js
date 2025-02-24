@@ -4,7 +4,7 @@ import { user } from "../../Controllers/MyCricketControllers/User.js";
 
 export const userrouter = express.Router()
 
-userrouter.post('/', user)
+userrouter.get('/', user)
 
 
 
