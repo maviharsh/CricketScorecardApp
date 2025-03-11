@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Link,useNavigate } from "react-router-dom";
 import {
   IconButton,
@@ -27,10 +27,14 @@ import {
 } from "@heroicons/react/24/outline";
 
 import { useState } from "react";
+import axios from "axios";
 
-export default function SidebarWithBurgerMenu({ imag, name }) {
+export default function SidebarWithBurgerMenu() {
   const [open, setOpen] = useState(0);
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
+  const [name,setName]=useState("Guest");
+  const [picture,setPicture]=useState("user-icon-svgrepo-com.svg");
+  const [isAuthorized,setIsAuthorized]=useState(true);
   const navigate=useNavigate();
 
   const handleOpen = (value) => {
@@ -40,8 +44,34 @@ export default function SidebarWithBurgerMenu({ imag, name }) {
   const openDrawer = () => setIsDrawerOpen(true);
   const closeDrawer = () => setIsDrawerOpen(false);
 
+  useEffect(()=>{
+      axios.get(`${process.env.REACT_APP_API_URL}/api/authstatus`,{withCredentials:true})
+      .then((response)=>{
+          const {name,image}=response.data;
+           setName(name);
+           setPicture(image.url);
+           setIsAuthorized(false);
+      })
+      .catch((err)=>{
+        setName("Guest");
+        setPicture("user-icon-svgrepo-com.svg");
+        setIsAuthorized(true);
+         console.log("not found");
+      })
+
+  },[isDrawerOpen])
+
+
   const handleclick = async () => {
 
+    if(isAuthorized)
+    {
+      navigate("/login");
+    }
+    else
+    {
+
+    
        try {
       const response = await fetch(
         `${process.env.REACT_APP_API_URL}/api/loginform/logout`,
@@ -55,13 +85,17 @@ export default function SidebarWithBurgerMenu({ imag, name }) {
       );
       if (response.ok) {
         console.log("logout done successfuly");
-        navigate("/login")
+        navigate("/")
+        setIsDrawerOpen(false);
+        setIsAuthorized(true);
       } else {
         console.log("logout unsuccessful");
+        setIsAuthorized(true);
       }
     } catch (err) {
       console.log(err);
     }
+  }
   
 }
 
@@ -81,7 +115,7 @@ export default function SidebarWithBurgerMenu({ imag, name }) {
           className="h-[calc(100vh-2rem)] w-full p-4"
         >
           <div className="mb-2 flex items-center gap-4 p-4">
-            <img src={imag} alt="brand" className="h-6 w-6" />
+            <img src={picture} alt="brand" className="h-10 " />
             <Typography variant="h5" color="blue-gray">
               {name}
             </Typography>
@@ -170,7 +204,17 @@ export default function SidebarWithBurgerMenu({ imag, name }) {
                 Profile
               </ListItem>
             </Link>
-            <Link to="/startmatch">
+            {(isAuthorized)?(
+              <ListItem>
+                <ListItemPrefix>
+                  <img
+                    src="cricket-svgrepo-com.svg"
+                    className="h-4"
+                    alt="imagica"
+                  ></img>
+                </ListItemPrefix>
+               Login To Start A Match
+              </ListItem>):(<Link to="/startmatch">
               <ListItem>
                 <ListItemPrefix>
                   <img
@@ -181,12 +225,13 @@ export default function SidebarWithBurgerMenu({ imag, name }) {
                 </ListItemPrefix>
                 Start A Match
               </ListItem>
-            </Link>
+            </Link>)}
+            
             <ListItem onClick={handleclick} >
               <ListItemPrefix>
                 <PowerIcon className="h-5 w-5"  />
               </ListItemPrefix>
-                  logout  
+                  {isAuthorized?"Login":"Logout"}  
            </ListItem>
           </List>
         </Card>

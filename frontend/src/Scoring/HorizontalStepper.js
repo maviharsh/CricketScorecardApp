@@ -38,7 +38,7 @@ export default function HorizontalStepper () {
       team2: Yup.string().required('Team Name is required'),
     }),
     Yup.object().shape({
-      maxOver: Yup.string().required('Over is required'),
+      maxOver: Yup.number().required('Over is required'),
     }),
     Yup.object().shape({
       batting: Yup.string().required('Please choose who is Batting'),
@@ -57,7 +57,7 @@ export default function HorizontalStepper () {
           </Step>
         ))}
       </Stepper>
-      <div className="mainContainer ">
+      <div className="mainContainer flex justify-center items-center">
         <Formik
           enableReinitialize
           validationSchema={currentValidationSchema}
@@ -79,7 +79,7 @@ export default function HorizontalStepper () {
             const { values, touched, errors, handleChange, handleBlur, handleSubmit, setFieldValue } = prp
             return (
               <form onSubmit={handleSubmit}>
-                <div className="formContainer">
+                <div className="formContainer flex flex-col gap-3">
                   {activeStep === 0 && (
                     <div>
                       <div className="formGroup">
@@ -92,10 +92,10 @@ export default function HorizontalStepper () {
                           onBlur={handleBlur}
                           helperText={errors.team1 && touched.team1 && errors.team1}
                           error={errors.team1 && touched.team1}
-                          className="textfieldWidth"
+                          className="textfieldWidth m-3"
                         />
                       </div>
-                      <div>
+                      <div className='flex justify-center mx-3'>
                         <Typography className="center">VS</Typography>
                       </div>
                       <div className="formGroup">
@@ -108,7 +108,7 @@ export default function HorizontalStepper () {
                           onBlur={handleBlur}
                           helperText={errors.team2 && touched.team2 && errors.team2}
                           error={errors.team2 && touched.team2}
-                          className="textfieldWidth"
+                          className="textfieldWidth m-3"
                         />
                       </div>
                     </div>
@@ -135,7 +135,7 @@ export default function HorizontalStepper () {
                   )}
                   {activeStep === 2 && (
                     <div>
-                      <div className="formGroup">
+                      <div className="formGroup mx-5">
                         <FormControl component='fieldset'>
                           <FormLabel component='legend'>Who is Batting?</FormLabel>
                           <RadioGroup
@@ -152,8 +152,8 @@ export default function HorizontalStepper () {
                       </div>
                     </div>
                   )}
-                  <div>
-                    <Button variant='contained' disabled={activeStep === 0} onClick={handleBack} className="backButton">
+                  <div className='flex justify-center items-center m-3'>
+                    <Button variant='contained' disabled={activeStep === 0} onClick={handleBack} className="backButton mx-2">
                       Back
                     </Button>
                     <Button id='submit' disabled={isSubmitting} variant='contained' color='primary' type='submit'>

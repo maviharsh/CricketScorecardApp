@@ -1,35 +1,23 @@
-import { Link } from 'react-router-dom';
 
 import Header from './Layout/Header';
 import Footer from './Layout/Footer';
 import Form from './Community/CommunityForms/Form';
-import Form2 from './Community/CommunityForms/CoachForm';
 import GroundForm from './Community/CommunityForms/GroundForm';
 import CoachForm from './Community/CommunityForms/CoachForm.js'
 import PostPage from './LookingPage/LookingPages/PostPage.js';
-import { InputWithButton } from './Message';
 import BottomForm from './LookingPage/LookingForms/BottomForm.js';
 import PlayerTeam from './LookingPage/LookingForms/PlayerTeamForm.js';
 import TournamentForm from './LookingPage/LookingForms/TournamentForm.js';
 import TournamentParticipateForm from './LookingPage/LookingForms/TournamentParticipate.js';
 import OpponentForm from './LookingPage/LookingForms/OpponentForm.js';
 import LookingHomePage from './LookingPage/LookingPages/LookingHomePage.js';
-import CardPage from './Community/CardPage';
 import MyCricketHomePage from './MyCricket/MyCricketHomePage';
- import Carding from './Community/Elements/Card';
-import IndividualPage from './Community/CommunityPages/CoachPage';
 import HomePage from './Community/CommunityPages/HomePage';
 import MyStats from './MyCricket/MyStats';
 import Message from './Message';
 import FrontHomePage from './HomePage/FrontHomePage';
 import MyTeams from './MyCricket/MyTeams';
 import ProfilePage from './MyCricket/ProfilePage';
-import StartMatch from './MyCricket/StartMatch';
-import AddNewTeam from './MyCricket/AddNewTeam';
-import { Button } from '@material-tailwind/react';
-import MatchDetails from './MyCricket/MatchDetails';
-import Toss from './MyCricket/Toss';
-import StartInnings from './MyCricket/StartInnings';
 import ScoringPage from './Scoring/ScoringPage';
 import ScoreBoard from './Scoring/ScoreBoard';
 import NotFound from './Scoring/NotFound';
@@ -43,6 +31,10 @@ import StreamerPage from './Community/CommunityPages/StreamerPage.js';
 import TShirtPage from './Community/CommunityPages/TShirtPage.js';
 import RegisterForm from './AuthenticationForms/RegisterForm.js';
 import LoginForm from './AuthenticationForms/LoginForm.js';
+import StartMatch from './MyCricket/StartMatch.js';
+import MatchDetails from './MyCricket/MatchDetails.js';
+import Toss from './MyCricket/Toss.js';
+import StartInnings from './MyCricket/StartInnings.js';
 
 
 export const routes=[
@@ -347,34 +339,11 @@ export const routes=[
       </div>
     },
     {
-      path:"/addnewteam",
-      element:
-      <div>
-        <Header />
-         <AddNewTeam />      
-        <Footer />
-      </div>
-    },
-    {
-      path:"/selectteam",
-      element:
-      <div>
-        <Header />
-         <MyTeams />   
-         <Link to="/addnewteam"> 
-         <div className='flex justify-center'>
-         <Button >Add New Team</Button>  
-         </div>
-         </Link>
-        <Footer />
-      </div>
-    },
-    {
       path:"/matchdetails",
       element:
       <div>
         <Header />
-        <MatchDetails />
+         <MatchDetails />      
         <Footer />
       </div>
     },
@@ -383,7 +352,7 @@ export const routes=[
       element:
       <div>
         <Header />
-        <Toss />
+         <Toss />      
         <Footer />
       </div>
     },
@@ -392,21 +361,12 @@ export const routes=[
       element:
       <div>
         <Header />
-        <StartInnings team1={"11 Kings"} team2={"ABES Kings"}/>
+         <StartInnings />      
         <Footer />
       </div>
     },
     {
       path:"/scoringpage",
-      element:
-      <div>
-        <Header />
-        <ScoringPage />
-        <Footer />
-      </div>
-    },
-    {
-      path:"/score",
       element:
       <div>
         <Header />

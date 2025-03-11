@@ -17,4 +17,4 @@ export {umpirelookingrouter} from "./LookingRoutes/UmpireLooking.js";
 export {userrouter} from "./MyCricketRoutes/User.js";
 export {loginrouter} from "./MyCricketRoutes/Login.js";
 export {signuprouter} from "./MyCricketRoutes/Signup.js";
-
+export {authstatusrouter} from "./MyCricketRoutes/AuthStatus.js"

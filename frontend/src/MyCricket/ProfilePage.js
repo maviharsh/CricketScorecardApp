@@ -131,7 +131,7 @@ export default function PersonalProfile() {
                         style={{ width: "80px" }}
                         fluid
                       />
-                      USER NOT FOUND
+                      Profile Not Found
                     </div>
                   </MDBCol>
                 </MDBRow>
