@@ -28,6 +28,7 @@ export const UserSchema=new Schema({
     {
         type:Number,
         required: true,
+        unique:true,
     },
     password:{
           type:String,

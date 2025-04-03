@@ -7,6 +7,7 @@ import {
    
   export default function AddNewTeam() {
     return (
+       
         <div className="flex justify-center m-5">
        <Card color="transparent" shadow={false}>
         <Typography variant="h4" color="blue-gray">
@@ -44,23 +45,13 @@ import {
                 className: "before:content-none after:content-none",
               }}
             />
-            <Typography variant="h6" color="blue-gray" className="-mb-3">
-              Captain Number
-            </Typography>
-            <Input
-              size="lg"
-              className=" !border-t-blue-gray-200 focus:!border-t-gray-900"
-              labelProps={{
-                className: "before:content-none after:content-none",
-              }}
-            />
-          
 
           </div>
           
           <Button className="mt-6" fullWidth>
-            ADD
+            ADD Players
           </Button>
+          
         </form>
       </Card>
       </div>

@@ -4,9 +4,9 @@ import dotenv from "dotenv";
 import cors from "cors";
 import cookieParser from "cookie-parser";
 
-import {authstatusrouter, coachrouter, commentatorrouter, groundrouter, scorerrouter, shoprouter, streamerrouter, tshirtrouter, umpirerouter} from "./Routes/index.js"  //COMMUNITY ROUTERS
+import { authstatusrouter, coachrouter, commentatorrouter, groundrouter, scorerrouter, shoprouter, streamerrouter, tshirtrouter, umpirerouter} from "./Routes/index.js"  //COMMUNITY ROUTERS
 import {groundlookingrouter, opponentrouter, playerforteamrouter, scorerlookingrouter, teamforplayerrouter, teamsfortournamentrouter, tournamenttoparticipaterouter, umpirelookingrouter} from "./Routes/index.js"  //LOOKING ROUTERS
-import { signuprouter,loginrouter,userrouter } from "./Routes/index.js";
+import { signuprouter,loginrouter,userrouter,findteamrouter,findplayersrouter } from "./Routes/index.js";
 
 
 const app = express();
@@ -75,6 +75,9 @@ app.use('/api/signupform', signuprouter)
 app.use('/api/loginform',loginrouter)
 app.use('/api/user',userrouter)
 app.use('/api/authstatus',authstatusrouter)
+app.use('/api/findteam',findteamrouter)
+app.use('/api/findplayers',findplayersrouter)
+
 
 // Start server
 app.listen(port, () => {

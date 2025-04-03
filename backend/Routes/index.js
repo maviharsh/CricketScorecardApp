@@ -18,3 +18,5 @@ export {userrouter} from "./MyCricketRoutes/User.js";
 export {loginrouter} from "./MyCricketRoutes/Login.js";
 export {signuprouter} from "./MyCricketRoutes/Signup.js";
 export {authstatusrouter} from "./MyCricketRoutes/AuthStatus.js"
+export {findteamrouter} from "./MyCricketRoutes/FindTeam.js"
+export {findplayersrouter} from "./MyCricketRoutes/FindPlayers.js"

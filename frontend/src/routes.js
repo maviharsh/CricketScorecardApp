@@ -35,6 +35,9 @@ import StartMatch from './MyCricket/StartMatch.js';
 import MatchDetails from './MyCricket/MatchDetails.js';
 import Toss from './MyCricket/Toss.js';
 import StartInnings from './MyCricket/StartInnings.js';
+import SelectTeam from './MyCricket/SelectTeam.js';
+import AddNewTeam from './MyCricket/AddNewTeam.js';
+import AddPlayers from './MyCricket/AddPlayers.js';
 
 
 export const routes=[
@@ -374,6 +377,33 @@ export const routes=[
         <Footer />
       </div>
     },
+    {
+      path:"/selectteam",
+      element:
+      <div>
+        <Header />
+        <SelectTeam />
+        <Footer />
+      </div>
+    },
+    {
+        path:"/makenewteam",
+        element:
+        <div>
+           <Header />
+           <AddNewTeam />     
+           <Footer />
+        </div>
+    }, 
+    {
+      path:"/addplayers",
+      element:
+      <div>
+         <Header />
+         <AddPlayers />     
+         <Footer />
+      </div>
+  },
     {
       path:"/register",
       element:
