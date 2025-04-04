@@ -2,7 +2,6 @@ import React from "react";
 
 import { Input } from "@material-tailwind/react";
 
-import { Link } from "react-router-dom";
 import { useState } from "react";
 import {useFormik} from "formik";
 import * as Yup from "yup";
@@ -12,7 +11,6 @@ import {toast,ToastContainer} from 'react-toastify';
 
 export default function PlayerSearchForm({ onSearch }) {
     let [loading, setLoading] = useState(false);
-    let [data, setData] = useState(null);
  
 const initial={
    number:""  
@@ -27,19 +25,20 @@ const initial={
    validationSchema:TeamValidationSchema,
    onSubmit: async (e,{resetForm}) => {
     setLoading(true)
-    onSearch();
      await axios.post(`${process.env.REACT_APP_API_URL}/api/findplayers`,
         { number: values.number }, 
         { withCredentials: true } 
       )
      .then((response)=>{
-         console.log(response);
-     })
+        console.log(response.data.name);
+        onSearch(response.data.name);
+    })
      .catch((err)=>{
-      toast.error("Could Not Find Team");
+      toast.error("Could Not Find Player");
      })
     resetForm();
-    setLoading(false)
+    setLoading(false);
+
      
   }
  })
@@ -83,6 +82,7 @@ const initial={
               />
             </svg>
           </button>
+          <ToastContainer />
       </div>
     </form>
   );

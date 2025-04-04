@@ -1,22 +1,43 @@
+import { useLocation } from "react-router-dom";
 import { useState } from "react";
 import { Card, Button, Typography } from "@material-tailwind/react";
 import PlayerSearchForm from "./PlayerSearchForm";
+import { toast,ToastContainer } from "react-toastify";
+import axios from "axios";
 
 export default function AddPlayers() {
+  const location=useLocation();
+  const obj=location.state||{};
+  console.log(obj);
   const [players, setPlayers] = useState([]); 
 
-  const handleSearch = () => {
+  const handleSearch = (player) => {
     if (players.length < 11) {
-      setPlayers([...players, `Player ${players.length + 1}`]); 
+      console.log("player is --->",player);
+      setPlayers([...players, `${player}`]); 
     }
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async(e) => {
     e.preventDefault();
     if (players.length === 11) {
-      alert("Team added successfully!"); 
+        await axios.post(`${process.env.REACT_APP_API_URL}/api/addteam`,
+          {
+               teamname:obj.teamname,
+              city:obj.city,
+              captainname:obj.captainname,
+              players:players,
+          },
+          {withCredentials:true},
+        )
+          .then((response)=>{
+            console.log(response);
+          })
+          .catch((err)=>{
+            console.log(err);
+          })
     } else {
-      alert("You must add 11 players before submitting.");
+      toast.error("You must add 11 players before submitting.");
     }
   };
 
@@ -41,6 +62,7 @@ export default function AddPlayers() {
           </Button>
         </form>
       </Card>
+      <ToastContainer />
     </div>
   );
 }
