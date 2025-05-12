@@ -3,7 +3,8 @@ import mongoose, { Schema } from "mongoose";
 export const TeamSchema=new Schema({
      teamname:{
             type:'String',
-            required:true
+            required:true,
+            unique:true
      },
      city:{
            type:'String',

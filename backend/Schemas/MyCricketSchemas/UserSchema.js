@@ -1,4 +1,4 @@
-import { Schema } from "mongoose";
+import mongoose,{ Schema } from "mongoose";
 
 export const UserSchema=new Schema({
     name:{
@@ -44,6 +44,9 @@ export const UserSchema=new Schema({
                 type: String,
                 required: true,
             }
+    },
+    teams:{
+            type:[{type:mongoose.Schema.Types.ObjectId,ref:"TeamSchema"}]
     }
 },
     {timestamps: true}

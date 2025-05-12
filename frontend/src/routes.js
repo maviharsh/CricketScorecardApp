@@ -346,7 +346,7 @@ export const routes=[
       element:
       <div>
         <Header />
-         <MatchDetails />      
+         <MatchDetails head={"Match Details"} photo={"score-svgrepo-com.svg"} />      
         <Footer />
       </div>
     },

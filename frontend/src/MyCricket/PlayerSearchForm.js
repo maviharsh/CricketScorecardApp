@@ -30,8 +30,8 @@ const initial={
         { withCredentials: true } 
       )
      .then((response)=>{
-        console.log(response.data.name);
-        onSearch(response.data.name);
+        console.log(response.data._id,response.data._id);
+        onSearch(response.data._id,response.data.name);
     })
      .catch((err)=>{
       toast.error("Could Not Find Player");

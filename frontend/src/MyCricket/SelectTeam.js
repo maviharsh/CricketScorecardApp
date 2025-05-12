@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import React, { useState } from "react";
 import { useFormik } from "formik";
 import * as Yup from "yup";
@@ -6,7 +6,12 @@ import axios from "axios";
 import { toast, ToastContainer } from "react-toastify";
 
 export default function SelectTeam() {
-  let [loading, setLoading] = useState(false);
+  const location = useLocation();
+  const navigate = useNavigate();
+
+  const { selecting, team1, team2 } = location.state || {};
+
+  const [loading, setLoading] = useState(false);
 
   const initial = {
     teamname: "",
@@ -21,32 +26,37 @@ export default function SelectTeam() {
     validationSchema: TeamValidationSchema,
     onSubmit: async (_values, { resetForm }) => {
       setLoading(true);
-
-      await axios
-        .post(
+      try {
+        const response = await axios.post(
           `${process.env.REACT_APP_API_URL}/api/findteam`,
-          { teamname: values.teamname }, 
-          { withCredentials: true } 
-        )
-        .then((response) => {
-          console.log(response);
-        })
-        .catch((err) => {
-          toast.error("Could Not Find Team");
-        });
+          { teamname: values.teamname },
+          { withCredentials: true }
+        );
 
-      resetForm();
-      setLoading(false);
+        navigate("/startmatch", {
+          state: {
+            team: response.data,
+            selecting,
+            team1,
+            team2,
+          },
+        });
+      } catch (err) {
+        toast.error("Could Not Find Team");
+      } finally {
+        resetForm();
+        setLoading(false);
+      }
     },
   });
 
-  const isValid = values.teamname;
+  const isValid = values.teamname.trim() !== "";
 
   return (
-    <div className="flex justify-around m-3">
-      <form onSubmit={handleSubmit}>
+    <div className="flex flex-col items-center m-3 gap-4">
+      <form onSubmit={handleSubmit} className="flex flex-col items-center gap-2">
         <input
-          className="!border-t-blue-gray-200 focus:!border-t-gray-900"
+          className="border p-2 rounded-md"
           name="teamname"
           type="text"
           onChange={handleChange}
@@ -56,7 +66,7 @@ export default function SelectTeam() {
         />
         <button
           type="submit"
-          className="bg-blue-900 text-white"
+          className="bg-blue-900 text-white px-4 py-2 rounded"
           disabled={!isValid}
         >
           {loading ? "FINDING..." : "FIND TEAM"}
@@ -64,8 +74,11 @@ export default function SelectTeam() {
       </form>
 
       <Link to="/makenewteam">
-        <button className="bg-blue-900 text-white">Add New Team</button>
+        <button className="bg-green-700 text-white px-4 py-2 rounded">
+          Add New Team
+        </button>
       </Link>
+
       <ToastContainer />
     </div>
   );

@@ -6,7 +6,7 @@ import cookieParser from "cookie-parser";
 
 import {  authstatusrouter, coachrouter, commentatorrouter, groundrouter, scorerrouter, shoprouter, streamerrouter, tshirtrouter, umpirerouter} from "./Routes/index.js"  //COMMUNITY ROUTERS
 import {groundlookingrouter, opponentrouter, playerforteamrouter, scorerlookingrouter, teamforplayerrouter, teamsfortournamentrouter, tournamenttoparticipaterouter, umpirelookingrouter} from "./Routes/index.js"  //LOOKING ROUTERS
-import { signuprouter,loginrouter,userrouter,findteamrouter,findplayersrouter,addteamrouter } from "./Routes/index.js";
+import { signuprouter,loginrouter,userrouter,findteamrouter,findplayersrouter,getinningsrouter,addteamrouter,creatematchrouter,createinningsrouter,secondinningsrouter,updateinningsrouter,createoverrouter,updateoverrouter,createbatterrouter,createbowlerrouter,updatebatterperformacerouter,updatebowlerperformacerouter } from "./Routes/index.js";    //MYCRICKET ROUTES
 
 
 const app = express();
@@ -78,6 +78,18 @@ app.use('/api/authstatus',authstatusrouter)
 app.use('/api/findteam',findteamrouter)
 app.use('/api/findplayers',findplayersrouter)
 app.use('/api/addteam',addteamrouter)
+app.use('/api/creatematch',creatematchrouter)
+app.use('/api',createinningsrouter)
+app.use('/api',getinningsrouter)
+app.use('/api/matches',secondinningsrouter)
+app.use('/api',updateinningsrouter)
+app.use('/api/innings',createoverrouter)
+app.use('/api',updateoverrouter)
+app.use('/api/innings',createbatterrouter)
+app.use('/api/innings',createbowlerrouter)
+app.use('/api',updatebatterperformacerouter)
+app.use('/api',updatebowlerperformacerouter)
+
 
 // Start server
 app.listen(port, () => {

@@ -1,8 +1,8 @@
 import MatchDetailsForm from "./MatchDetailsForm";
 
-export default function MatchDetails()
+export default function MatchDetails({head,photo})
 {
     return(
-        <MatchDetailsForm />
+        <MatchDetailsForm head={head} photo={photo} />
     )
 }
