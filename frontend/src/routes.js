@@ -423,7 +423,6 @@ export const routes=[
       </div>
     },
     {
-
           path:"*",
           element:
           <div>
