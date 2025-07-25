@@ -65,7 +65,7 @@ export const signup = async (req, res) => {
                 httpOnly: true,     // Prevents client-side JS access (Good)
                 secure: true,       // **MUST BE TRUE FOR HTTPS (Render)**
                 sameSite: "None",   // **MUST BE "None" FOR CROSS-SITE COOKIES**
-                domain: '.onrender.com', // **RECOMMENDED: Sets the cookie for all .onrender.com subdomains**
+                // domain: '.onrender.com', // **RECOMMENDED: Sets the cookie for all .onrender.com subdomains**
                 maxAge: 60 * 60 * 1000, // Matches JWT expiration (1 hour in milliseconds)
                 // path: '/', // Often good practice to explicitly set path
             });
