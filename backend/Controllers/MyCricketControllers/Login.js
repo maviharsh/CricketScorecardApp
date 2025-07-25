@@ -28,7 +28,7 @@ export const login = async (req, res) => {
         httpOnly: true, // Prevents client-side JS access (Good)
         secure: true,   // **MUST BE TRUE FOR HTTPS (Render)**
         sameSite: "None", // **MUST BE "None" FOR CROSS-SITE COOKIES (Frontend/Backend on different Render subdomains)**
-        domain: '.onrender.com', // **RECOMMENDED: Sets the cookie for all .onrender.com subdomains**
+        // domain: '.onrender.com', // **RECOMMENDED: Sets the cookie for all .onrender.com subdomains**
         maxAge: 60 * 60 * 1000, // 1 hour in milliseconds (Matches JWT expiry)
         // You might also want to set a path if your API is under a specific path, e.g., path: '/'
       });
@@ -49,7 +49,7 @@ export const logout = async (req, res) => {
       httpOnly: true,
       secure: true,   // **MUST BE TRUE FOR HTTPS (Render)**
       sameSite: "None", // **MUST BE "None" FOR CROSS-SITE COOKIES**
-      domain: '.onrender.com', // **RECOMMENDED: Match the domain used in login**
+      // domain: '.onrender.com', // **RECOMMENDED: Match the domain used in login**
     });
     // --- END CRITICAL FIXES ---
 
