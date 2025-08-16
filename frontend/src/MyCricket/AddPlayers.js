@@ -1,6 +1,4 @@
-//RESUME
-
-import { useLocation } from "react-router-dom";
+import { useLocation,useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { Card, Button, Typography } from "@material-tailwind/react";
 import PlayerSearchForm from "./PlayerSearchForm";
@@ -8,48 +6,48 @@ import { toast,ToastContainer } from "react-toastify";
 import axios from "axios";
 
 export default function AddPlayers() {
-  const location=useLocation();
-  const obj=location.state||{};
-  console.log(obj);
-  const [players, setPlayers] = useState([]); 
-  const [playerids,setPlayerIds]=useState([]);
-  const [isValid,setIsValid]=useState(false);
+ const location = useLocation();
+ const navigate=useNavigate();
+    const { teamname, city } = location.state || {};
+    const [players, setPlayers] = useState([]); 
+    const [playerIds, setPlayerIds] = useState([]);
+    const [captain, setCaptain] = useState(null); // { id: '...', name: '...' }
 
-  const handleSearch = (player_id,player_name) => {
-    if (players.length < 11) {
-      console.log("player is --->",player_id,player_name);
-      setPlayers([...players, `${player_name}`]); 
-      setPlayerIds([...playerids,`${player_id}`])
-    }
-    else
-    {
-      setIsValid(true);
-    }
-  };
+    const handleAddPlayer = (playerId, playerName) => {
+        if (players.length < 11 && !playerIds.includes(playerId)) {
+            setPlayers([...players, playerName]);
+            setPlayerIds([...playerIds, playerId]);
+        }
+    };
 
-  const handleSubmit = async(e) => {
-    e.preventDefault();
-    if (players.length === 11) {
-        await axios.post(`${process.env.REACT_APP_API_URL}/api/addteam`,
-          {
-               teamname:obj.teamname,
-              city:obj.city,
-              captainname:obj.captainname,
-              players:playerids,
-          },
-          {withCredentials:true},
-        )
-          .then((response)=>{
-            console.log(response.data);
-          })
-          .catch((err)=>{
-            console.log(err);
-            toast.error("A Team with this name already exists.");
-          })
-    } else {
-      toast.error("You must add 11 players before submitting.");
-    }
-  };
+    const handleSelectCaptain = (captainId, captainName) => {
+        setCaptain({ id: captainId, name: captainName });
+        // Automatically add captain to the players list if not already there
+        if (!playerIds.includes(captainId)) {
+            handleAddPlayer(captainId, captainName);
+        }
+    };
+    
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        if (players.length > 1 && captain) {
+            try {
+                // ✅ FIX: Use correct route '/api/teams' and send captainId
+                await axios.post(`${process.env.REACT_APP_API_URL}/api/teams`, {
+                    teamname,
+                    city,
+                    captainId: captain.id,
+                    playerIds: playerIds,
+                }, { withCredentials: true });
+                toast.success("Team created successfully!");
+                navigate('/selectteam'); // or wherever you want to go next
+            } catch (err) {
+                toast.error(err.response?.data?.error || "Failed to create team.");
+            }
+        } else {
+            toast.error("You must select a captain and atleast 2 unique players.");
+        }
+    };
 
   return (
     <div className="flex justify-center m-5">
@@ -58,7 +56,12 @@ export default function AddPlayers() {
           Add Your Team
         </Typography>
 
-        <PlayerSearchForm onSearch={handleSearch} />
+         <Typography variant="h5">Select Captain</Typography>
+            {captain ? <p>Captain: {captain.name}</p> : <PlayerSearchForm onSearch={handleSelectCaptain} />}
+            
+            {/* Player Selection */}
+            <Typography variant="h5">Add Players ({players.length}/11)</Typography>
+            <PlayerSearchForm onSearch={handleAddPlayer} />
 
         <ul>
           {players.map((player, index) => (
@@ -67,7 +70,7 @@ export default function AddPlayers() {
         </ul>
 
         <form className="mt-8 mb-2 w-80 max-w-screen-lg sm:w-96" onSubmit={handleSubmit}>
-          <Button type="submit" className="mt-6" fullWidth disabled={!isValid}>
+          <Button type="submit" className="mt-6" fullWidth >
             ADD Team
           </Button> 
         </form>

@@ -18,15 +18,13 @@ import {
                  
                   const initial={
                     teamname:"",
-                    city:"",
-                    captainname:""
+                    city:""
                   }
                 
-                  const NewTeamValidationSchema = Yup.object({
-                    teamname: Yup.string().required("Please enter time"),
-                    city:Yup.string().required("Please enter address"),
-                    captainname: Yup.string().required("Please enter your city")
-                   });
+                   const NewTeamValidationSchema = Yup.object({
+        teamname: Yup.string().required("Please enter team name"),
+        city: Yup.string().required("Please enter a city")
+    });
                 
                   const {values,handleBlur,handleChange,handleSubmit,errors,resetForm}=useFormik({
                     initialValues:initial,
@@ -39,14 +37,12 @@ import {
                         {
                           state:{
                             teamname:values.teamname,
-                            city:values.city,
-                            captainname:values.captainname
-                          }
+                            city:values.city                          }
                         }
                       );
                     }
                   })
-                  const isValid=values.teamname&&values.city&&values.captainname;
+                  const isValid=values.teamname&&values.city;
 
     return (
        
@@ -90,28 +86,9 @@ import {
             />
              {
                     errors.city&&<small>{errors.city}</small>
-                  } 
-            <Typography variant="h6" color="blue-gray" className="-mb-3">
-              Captain Name
-            </Typography>
-            <Input
-              size="lg"
-              className=" !border-t-blue-gray-200 focus:!border-t-gray-900"
-              labelProps={{
-                className: "before:content-none after:content-none",
-              }}
-              name="captainname"
-              onChange={handleChange}
-                  value={values.captainname}
-                  onBlur={handleBlur}
-            />
-             {
-                    errors.captainname&&<small>{errors.captainname}</small>
-             } 
-
+              } 
           </div>
                  <Button type="submit" size="lg" disabled={!isValid}>{loading ? "Submitting..." : "ADD PLAYERS"}</Button> 
-          
         </form>
       </Card>
       </div>

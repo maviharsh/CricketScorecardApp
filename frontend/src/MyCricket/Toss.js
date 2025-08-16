@@ -1,129 +1,59 @@
+import React, { useState } from "react";
+import { useLocation, useNavigate, useParams } from "react-router-dom";
+import axios from "axios";
 import {
-  Button,
   Card,
-  CardBody,
   CardHeader,
+  CardBody,
   Typography,
+  Button,
 } from "@material-tailwind/react";
-import { useLocation, useNavigate } from "react-router-dom";
-import { useState, useEffect } from "react";
 
 export default function Toss() {
-  const location = useLocation();
   const navigate = useNavigate();
-  const {
-    matchId,
-    team1 = "Team A",
-    team2 = "Team B",
-    maxOvers = 20,
-  } = location.state || {};
+  const { matchId } = useParams(); // Get matchId from the URL, e.g., /toss/60b8e2f...
+  const { state: locationState } = useLocation();
 
-  const [tossWinner, setTossWinner] = useState("");
+  // Get team info from the state passed by the previous route for display purposes
+  const { team1Name, team2Name, team1Id, team2Id } = locationState || {};
+
+  const [tossWinnerId, setTossWinnerId] = useState("");
   const [decision, setDecision] = useState("");
   const [error, setError] = useState("");
+  const [loading, setLoading] = useState(false);
 
-  // Debug state changes
-  useEffect(() => {
-    console.log("Current state:", {
-      tossWinner,
-      decision,
-      matchId,
-      team1,
-      team2,
-      maxOvers,
-    });
-  }, [tossWinner, decision, matchId, team1, team2, maxOvers]);
-
-  const handleTossWinner = (team) => {
-    console.log("Selected toss winner:", team);
-    setTossWinner(team);
-    setError("");
+  const handleTossWinnerSelect = (teamId) => {
+    setTossWinnerId(teamId);
+    setError(""); // Clear error when a selection is made
   };
 
-  const handleDecision = (value) => {
-    console.log("Selected decision:", value);
-    setDecision(value);
-    setError("");
+  const handleDecisionSelect = (selectedDecision) => {
+    setDecision(selectedDecision);
+    setError(""); // Clear error when a selection is made
   };
 
   const handleSubmit = async () => {
-    console.log("Submitting toss data:", {
-      matchId,
-      tossWinner,
-      decision,
-      inning: {
-        inningNumber: 1,
-        battingTeamId:
-          decision === "bat"
-            ? tossWinner
-            : tossWinner === team1
-            ? team2
-            : team1,
-        bowlingTeamId:
-          decision === "bat"
-            ? tossWinner === team1
-              ? team2
-              : team1
-            : tossWinner,
-      },
-    });
-
-    if (!tossWinner || !decision) {
-      setError("Please select toss winner and decision");
+    if (!tossWinnerId || !decision) {
+      setError("Please select the toss winner and their decision.");
       return;
     }
-
-    if (!matchId) {
-      setError("Missing match ID. Please start the match again.");
-      return;
-    }
-
+    setLoading(true);
     try {
-      const battingTeam =
-        decision === "bat" ? tossWinner : tossWinner === team1 ? team2 : team1;
-      const bowlingTeam = battingTeam === team1 ? team2 : team1;
-
-      const response = await fetch(
-        `http://localhost:4000/api/${matchId}/toss`,
+      // The backend will handle all logic of creating the inning
+      await axios.post(
+        `${process.env.REACT_APP_API_URL}/api/matches/${matchId}/toss`,
         {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({
-            tossWinner,
-            decision,
-            inning: {
-              inningNumber: 1,
-              battingTeamId: battingTeam,
-              bowlingTeamId: bowlingTeam,
-            },
-          }),
-        }
+          tossWinnerId,
+          decision,
+        },
+        { withCredentials: true }
       );
 
-      if (!response.ok) {
-        const errorText = await response.text();
-        console.error("Fetch response:", response.status, errorText);
-        throw new Error(
-          `Failed to update toss: ${response.status} - ${errorText}`
-        );
-      }
-
-      const { match, inning } = await response.json();
-      console.log("Toss response:", { match, inning });
-
-      navigate("/scoringpage", {
-        state: {
-          matchId,
-          team1,
-          team2,
-          maxOvers,
-          batting: battingTeam,
-          inningId: inning._id,
-        },
-      });
+      // Navigate to the scoreboard page. It will fetch its own data using the matchId.
+      navigate(`/scoreboard/${matchId}`);
     } catch (err) {
-      console.error("Fetch error:", err.message);
-      setError(`Error processing toss: ${err.message}`);
+      setError(err.response?.data?.error || "Failed to process toss. Please try again.");
+      setLoading(false);
     }
   };
 
@@ -136,9 +66,6 @@ export default function Toss() {
           shadow={false}
           className="m-0 grid place-items-center px-4 py-8 text-center"
         >
-          <div className="mb-4 h-20 p-6 text-white">
-            <img src="toss-icon.png" alt="toss-icon" className="h-16" />
-          </div>
           <Typography variant="h5" color="white">
             Toss
           </Typography>
@@ -151,62 +78,46 @@ export default function Toss() {
               </Typography>
               <div className="flex justify-evenly gap-4">
                 <Button
-                  variant={tossWinner === team1 ? "filled" : "outlined"}
-                  color={tossWinner === team1 ? "blue" : "gray"}
-                  className="text-lg"
-                  onClick={() => handleTossWinner(team1)}
-                  disabled={!team1}
+                  onClick={() => handleTossWinnerSelect(team1Id)}
+                  color={tossWinnerId === team1Id ? "blue" : "blue-gray"}
+                  disabled={!team1Id}
                 >
-                  {team1}
+                  {team1Name || "Team 1"}
                 </Button>
                 <Button
-                  variant={tossWinner === team2 ? "filled" : "outlined"}
-                  color={tossWinner === team2 ? "blue" : "gray"}
-                  className="text-lg"
-                  onClick={() => handleTossWinner(team2)}
-                  disabled={!team2}
+                  onClick={() => handleTossWinnerSelect(team2Id)}
+                  color={tossWinnerId === team2Id ? "blue" : "blue-gray"}
+                  disabled={!team2Id}
                 >
-                  {team2}
+                  {team2Name || "Team 2"}
                 </Button>
               </div>
             </div>
 
-            {tossWinner && (
+            {tossWinnerId && (
               <div>
                 <Typography variant="h6" color="blue-gray" className="mb-2">
-                  Winner of the toss elected to:
+                  Elected to:
                 </Typography>
-                <div className="flex flex-col gap-2">
-                  <div className="flex flex-col gap-2">
-                    <label className="flex items-center">
-                      <input
-                        type="radio"
-                        name="decision"
-                        value="bat"
-                        checked={decision === "bat"}
-                        onChange={() => handleDecision("bat")}
-                        className="mr-2"
-                      />
+                <div className="flex justify-evenly gap-4">
+                   <Button
+                      onClick={() => handleDecisionSelect("bat")}
+                      color={decision === "bat" ? "green" : "blue-gray"}
+                    >
                       Bat
-                    </label>
-                    <label className="flex items-center">
-                      <input
-                        type="radio"
-                        name="decision"
-                        value="bowl"
-                        checked={decision === "bowl"}
-                        onChange={() => handleDecision("bowl")}
-                        className="mr-2"
-                      />
+                    </Button>
+                    <Button
+                      onClick={() => handleDecisionSelect("bowl")}
+                      color={decision === "bowl" ? "green" : "blue-gray"}
+                    >
                       Bowl
-                    </label>
-                  </div>
+                    </Button>
                 </div>
               </div>
             )}
 
             {error && (
-              <Typography color="red" variant="small" className="mt-2">
+              <Typography color="red" variant="small" className="mt-2 text-center">
                 {error}
               </Typography>
             )}
@@ -214,10 +125,10 @@ export default function Toss() {
             <Button
               className="text-xl mt-4"
               color="blue"
-              disabled={!tossWinner || !decision}
+              disabled={!tossWinnerId || !decision || loading}
               onClick={handleSubmit}
             >
-              Let's Play
+              {loading ? "Starting Match..." : "Let's Play"}
             </Button>
           </div>
         </CardBody>

@@ -6,20 +6,16 @@ import './index.css';
 import "@material-tailwind/react";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import { routes } from './routes';
+import { MatchProvider } from './context/MatchContext';
 
 const router = createBrowserRouter(routes);
 
-
-const App = () => {
-
-  return (
-      <RouterProvider router={router} />
-  );
-};
-
 const root = ReactDOM.createRoot(document.getElementById('root'));
+
 root.render(
   <React.StrictMode>
-    <App />
+    <MatchProvider>
+      <RouterProvider router={router} />
+    </MatchProvider>
   </React.StrictMode>
 );

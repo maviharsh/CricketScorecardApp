@@ -25,7 +25,7 @@ const initial={
    validationSchema:TeamValidationSchema,
    onSubmit: async (e,{resetForm}) => {
     setLoading(true)
-     await axios.post(`${process.env.REACT_APP_API_URL}/api/findplayers`,
+        await axios.post(`${process.env.REACT_APP_API_URL}/api/players/find-by-contact`, 
         { number: values.number }, 
         { withCredentials: true } 
       )

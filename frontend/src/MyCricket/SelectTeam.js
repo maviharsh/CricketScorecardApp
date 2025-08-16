@@ -28,18 +28,21 @@ export default function SelectTeam() {
       setLoading(true);
       try {
         const response = await axios.post(
-          `${process.env.REACT_APP_API_URL}/api/findteam`,
-          { teamname: values.teamname },
+          `${process.env.REACT_APP_API_URL}/api/teams/find`,
+          { teamname: _values.teamname },
           { withCredentials: true }
         );
+        
+        const foundTeam = response.data;
 
-        navigate("/startmatch", {
-          state: {
-            team: response.data,
-            selecting,
-            team1,
-            team2,
-          },
+
+       navigate("/startmatch", {
+            state: {
+                team: { name: foundTeam.teamname, id: foundTeam._id }, // Pass ID and Name
+                selecting,
+                team1: selecting === "team1" ? { name: foundTeam.teamname, id: foundTeam._id } : team1,
+                team2: selecting === "team2" ? { name: foundTeam.teamname, id: foundTeam._id } : team2,
+            },
         });
       } catch (err) {
         toast.error("Could Not Find Team");

@@ -18,7 +18,6 @@ import Message from './Message';
 import FrontHomePage from './HomePage/FrontHomePage';
 import MyTeams from './MyCricket/MyTeams';
 import ProfilePage from './MyCricket/ProfilePage';
-import ScoringPage from './Scoring/ScoringPage';
 import ScoreBoard from './Scoring/ScoreBoard';
 import NotFound from './Scoring/NotFound';
 import CoachPage from './Community/CommunityPages/CoachPage';
@@ -34,7 +33,6 @@ import LoginForm from './AuthenticationForms/LoginForm.js';
 import StartMatch from './MyCricket/StartMatch.js';
 import MatchDetails from './MyCricket/MatchDetails.js';
 import Toss from './MyCricket/Toss.js';
-import StartInnings from './MyCricket/StartInnings.js';
 import SelectTeam from './MyCricket/SelectTeam.js';
 import AddNewTeam from './MyCricket/AddNewTeam.js';
 import AddPlayers from './MyCricket/AddPlayers.js';
@@ -92,15 +90,6 @@ export const routes=[
       <div>
           <Header />
         <PostPage />,
-        <Footer />
-        </div>
-    },
-    {
-      path:"/mystats",
-      element:
-      <div>
-          <Header />
-        <MyStats />,
         <Footer />
         </div>
     },
@@ -334,101 +323,58 @@ export const routes=[
     },
     {
       path:"/startmatch",
-      element:
-      <div>
-        <Header />
-         <StartMatch />      
-        <Footer />
-      </div>
-    },
-    {
-      path:"/matchdetails",
-      element:
-      <div>
-        <Header />
-         <MatchDetails head={"Match Details"} photo={"score-svgrepo-com.svg"} />      
-        <Footer />
-      </div>
-    },
-    {
-      path:"/tosspage",
-      element:
-      <div>
-        <Header />
-         <Toss />      
-        <Footer />
-      </div>
-    },
-    {
-      path:"/startinnings",
-      element:
-      <div>
-        <Header />
-         <StartInnings />      
-        <Footer />
-      </div>
-    },
-    {
-      path:"/scoringpage",
-      element:
-      <div>
-        <Header />
-        <ScoreBoard />
-        <Footer />
-      </div>
+      element: <div><Header /><StartMatch /><Footer /></div>
     },
     {
       path:"/selectteam",
-      element:
-      <div>
-        <Header />
-        <SelectTeam />
-        <Footer />
-      </div>
+      element: <div><Header /><SelectTeam /><Footer /></div>
     },
     {
-        path:"/makenewteam",
-        element:
-        <div>
-           <Header />
-           <AddNewTeam />     
-           <Footer />
-        </div>
-    }, 
+      path:"/makenewteam",
+      element: <div><Header /><AddNewTeam /><Footer /></div>
+    },
     {
       path:"/addplayers",
-      element:
-      <div>
-         <Header />
-         <AddPlayers />     
-         <Footer />
-      </div>
-  },
+      element: <div><Header /><AddPlayers /><Footer /></div>
+    },
+    {
+      path:"/matchdetails",
+      element: <div><Header /><MatchDetails head={"Match Details"} photo={"score-svgrepo-com.svg"} /><Footer /></div>
+    },
+    {
+      // ✅ UPDATED: Toss page now uses a URL parameter for the match ID
+      path:"/toss/:matchId",
+      element: <div><Header /><Toss /><Footer /></div>
+    },
+    {
+      // ✅ UPDATED: This is the main scoring page. It requires a matchId in the URL.
+      path:"/scoreboard/:matchId",
+      element: <div><Header /><ScoreBoard /><Footer /></div>
+    },
+    // --- Authentication Routes ---
     {
       path:"/register",
-      element:
-      <div>
-        <Header />
-        <RegisterForm />
-        <Footer />
-      </div>
+      element: <div><Header /><RegisterForm /><Footer /></div>
     },
     {
       path:"/login",
-      element:
-      <div>
-        <Header />
-        <LoginForm />
-        <Footer />
-      </div>
+      element: <div><Header /><LoginForm /><Footer /></div>
     },
     {
-          path:"*",
-          element:
-          <div>
-            <Header />
-            <NotFound />
-            <Footer />
-          </div>
+      path:"/profilepage",
+      element: <div><Header /><ProfilePage /><Footer /></div>
+    },
+    {
+      path:"/myteams",
+      element: <div><Header /><MyTeams /><Footer /></div>
+    },
+    {
+      path:"/mystats",
+      element: <div><Header /><MyStats /><Footer /></div>
+    },
+
+    {
+      path:"*",
+      element: <div><Header /><NotFound /><Footer /></div>
     }
   ]

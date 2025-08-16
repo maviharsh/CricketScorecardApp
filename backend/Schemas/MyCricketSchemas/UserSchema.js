@@ -44,9 +44,8 @@ export const UserSchema=new Schema({
                 type: String,
                 required: true,
             }
-    },
-    teams:{
-            type:[{type:mongoose.Schema.Types.ObjectId,ref:"TeamSchema"}]
+    }, teams:{
+        type:[{type:mongoose.Schema.Types.ObjectId,ref:"team"}]
     }
 },
     {timestamps: true}

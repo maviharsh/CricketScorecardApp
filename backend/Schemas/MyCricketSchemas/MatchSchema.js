@@ -1,39 +1,52 @@
 import mongoose, { Schema } from "mongoose";
 
 export const MatchSchema = new Schema({
-  maxOvers: {
-    type: Number,
-    required: true,
-  },
-  startDate: {
-    type: Date,
-    required: true,
-  },
-  matchTime: {
+    team1Id: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "team",
+        required: true,
+    },
+    team2Id: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "team",
+        required: true,
+    },
+    maxOvers: {
+        type: Number,
+        required: true,
+    },
+    startDate: {
+        type: Date,
+        required: true,
+    },
+    matchTime: {
+        type: String,
+        required: true,
+    },
+    ground: {
+        type: String,
+        required: true,
+    },
+    city: {
+        type: String,
+        required: true,
+    },
+    tossWinnerId: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "team"
+    },
+    tossDecision: { type: String, enum: ["bat", "bowl"] },
+    // ✅ ADDED: Essential fields for tracking match state and outcome
+    status: {
     type: String,
-    required: true,
-  },
-  ground: {
-    type: String,
-    required: true,
-  },
-  city: {
-    type: String,
-    required: true,
-  },
-  tossWinner: { type: String }, // Store toss winner team name
-  tossDecision: { type: String, enum: ["bat", "bowl"] }, // Store toss decision
-  status: {
-    type: String,
-    enum: ["pending", "ongoing", "completed", "tied"],
-    default: "pending",
-  },
-  team1: {
-    type: { type: mongoose.Schema.Types.ObjectId, ref: "TeamSchema" },
-  },
-  team2: {
-    type: { type: mongoose.Schema.Types.ObjectId, ref: "TeamSchema" },
-  },
-  createdAt: { type: Date, default: Date.now },
-  updatedAt: { type: Date, default: Date.now },
-});
+    // Use 'scheduled' instead of 'pending' in the list of options
+    enum: ["scheduled", "ongoing", "completed", "tied", "abandoned"],
+    // Set the default to 'scheduled'
+    default: "scheduled",
+    },
+    result: {
+        type: String,
+        default: "Match has not started yet."
+    },
+    innings: [{ type: mongoose.Schema.Types.ObjectId, ref: "innings" }],
+}, { timestamps: true });
