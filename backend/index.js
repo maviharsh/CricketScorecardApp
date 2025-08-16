@@ -30,7 +30,7 @@ app.use(express.urlencoded({ limit: "50mb", extended: true }));
 
 // CORS configuration (already looks good, just confirming placement)
 app.use(cors({
-  origin: "http://localhost:3000", // Make sure this is your exact frontend URL
+  origin: "*", // Make sure this is your exact frontend URL
   credentials: true
 }));
 
@@ -71,7 +71,7 @@ app.get('/test-cookie', (req, res) => {
     httpOnly: true,
     secure: true,   // Add secure: true
     sameSite: "None", // Add sameSite: "None"
-    // domain: '.onrender.com' // Add domain
+    domain: '.onrender.com' // Add domain
   });
   res.send("Cookie set");
 });
