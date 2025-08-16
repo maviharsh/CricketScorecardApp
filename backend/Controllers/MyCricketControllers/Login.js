@@ -2,6 +2,14 @@ import { User } from "../../Model/MyCricketModels/UserModel.js";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 
+const cookieOptions = {
+  httpOnly: true,
+  secure: process.env.NODE_ENV === "production",
+  sameSite: process.env.NODE_ENV === "production" ? "None" : "Lax",
+  domain: process.env.NODE_ENV === "production" ? ".onrender.com" : undefined,
+  path: "/",
+};
+
 export const login = async (req, res) => {
   const { email, password } = req.body;
   try {
@@ -23,16 +31,10 @@ export const login = async (req, res) => {
       });
       console.log(token);
 
-      // --- CRITICAL FIXES FOR RENDER ---
-      res.cookie("token", token, {
-        httpOnly: true, // Prevents client-side JS access (Good)
-        secure: true,   // **MUST BE TRUE FOR HTTPS (Render)**
-        sameSite: "None", // **MUST BE "None" FOR CROSS-SITE COOKIES (Frontend/Backend on different Render subdomains)**
-        domain: process.env.NODE_ENV === "production" ? ".onrender.com" : undefined,
-        maxAge: 60 * 60 * 1000, // 1 hour in milliseconds (Matches JWT expiry)
-        // You might also want to set a path if your API is under a specific path, e.g., path: '/'
-      });
-      // --- END CRITICAL FIXES ---
+       res.cookie("token", token, {
+      ...cookieOptions,
+      maxAge: 60 * 60 * 1000, // 1h
+    });
 
       res.status(200).json("login successful");
     }
@@ -44,15 +46,8 @@ export const login = async (req, res) => {
 
 export const logout = async (req, res) => {
   try {
-    // --- CRITICAL FIXES FOR RENDER ---
-    res.clearCookie("token", {
-      httpOnly: true,
-      secure: true,   // **MUST BE TRUE FOR HTTPS (Render)**
-      sameSite: "None", // **MUST BE "None" FOR CROSS-SITE COOKIES**
-        domain: process.env.NODE_ENV === "production" ? ".onrender.com" : undefined,
-          path: "/",   // 🔥 Must match login cookie
-    });
-    // --- END CRITICAL FIXES ---
+
+    res.clearCookie("token", cookieOptions);
 
     res.status(200).json({ message: "Logged out successfully" });
   } catch (err) {
