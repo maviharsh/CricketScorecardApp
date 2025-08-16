@@ -30,7 +30,7 @@ app.use(express.urlencoded({ limit: "50mb", extended: true }));
 
 // CORS configuration (already looks good, just confirming placement)
 app.use(cors({
-  origin: "*", // Make sure this is your exact frontend URL
+  origin: "https://cricketscorecardapp-website.onrender.com/", // Make sure this is your exact frontend URL
   credentials: true
 }));
 
