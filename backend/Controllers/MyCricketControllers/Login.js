@@ -48,11 +48,9 @@ export const logout = async (req, res) => {
   try {
 
     res.clearCookie("token", cookieOptions);
-
     res.status(200).json({ message: "Logged out successfully" });
   } catch (err) {
     console.log(err);
-    // This status code was wrong, changed to 500 for server error
     res.status(500).json({ error: "Error during logout" });
   }
 };
