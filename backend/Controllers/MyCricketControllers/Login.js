@@ -6,7 +6,7 @@ const cookieOptions = {
   httpOnly: true,
   secure: process.env.NODE_ENV === "production",
   sameSite: process.env.NODE_ENV === "production" ? "None" : "Lax",
-  domain: process.env.NODE_ENV === "production" ? ".onrender.com" : undefined,
+  // domain: process.env.NODE_ENV === "production" ? ".onrender.com" : undefined,
   path: "/",
 };
 
