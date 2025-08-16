@@ -50,6 +50,7 @@ export const logout = async (req, res) => {
       secure: true,   // **MUST BE TRUE FOR HTTPS (Render)**
       sameSite: "None", // **MUST BE "None" FOR CROSS-SITE COOKIES**
         domain: process.env.NODE_ENV === "production" ? ".onrender.com" : undefined,
+          path: "/",   // 🔥 Must match login cookie
     });
     // --- END CRITICAL FIXES ---
 
