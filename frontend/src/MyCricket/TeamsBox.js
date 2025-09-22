@@ -15,7 +15,7 @@ export default function TeamBox()
       <div>Defaulter Kings</div>
       </div>
       <div>Ghaziabad</div>
-      <div>Harsh Mavi</div>
+      <div>Ricky</div>
       </div>
       <Button
         size="sm"
