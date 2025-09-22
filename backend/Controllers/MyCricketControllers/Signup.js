@@ -25,14 +25,16 @@ export const signup = async (req, res) => {
                 console.log("Cloudinary Results:", results); // Debugging
                 // Ensure results has 'url' and 'public_id' or similar properties
                 // based on your uploadToCloudinary implementation.
-                if (!results || !results.url || !results.public_id) {
-                    console.error("Cloudinary upload failed: Missing URL or Public ID");
-                    return res.status(500).json({ error: "Image upload failed. Please try again." });
-                }
-                imageData = {
-                    url: results.url,
-                    publicId: results.public_id,
-                };
+               // FIX: Check for the correct property name 'publicId'
+if (!results || !results.url || !results.publicId) {
+    console.error("Cloudinary upload failed: Missing URL or Public ID");
+    return res.status(500).json({ error: "Image upload failed. Please try again." });
+}
+imageData = {
+    url: results.url,
+    // FIX: Assign from the correct property name 'publicId'
+    publicId: results.publicId, 
+};
             } else {
                 // Consider if image is always mandatory. If not, remove this error.
                 return res.status(400).json({ error: "Image is required for signup." });
